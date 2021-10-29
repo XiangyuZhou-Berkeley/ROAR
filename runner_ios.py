@@ -7,6 +7,7 @@ from ROAR_iOS.config_model import iOSConfig
 from ROAR.agent_module.line_following_agent_2 import LineFollowingAgent
 # from ROAR.agent_module.special_agents.recording_agent import RecordingAgent
 from ROAR.agent_module.forward_only_agent import ForwardOnlyAgent
+from ROAR.agent_module.flow_agent import FlowAgent
 from ROAR.utilities_module.vehicle_models import Vehicle
 import logging
 import argparse
@@ -89,7 +90,8 @@ if __name__ == '__main__':
                 json.dump(ios_config.dict(), ios_config_file_path.open('w'), indent=4)
 
         if success or args.reconnect is False:
-            agent = ForwardOnlyAgent(vehicle=Vehicle(), agent_settings=agent_config, should_init_default_cam=True)
+            agent = FlowAgent(vehicle=Vehicle(), agent_settings=agent_config,
+                              should_init_default_cam=True, target_speed=20)
             ios_runner = iOSRunner(agent=agent, ios_config=ios_config)
             ios_runner.start_game_loop(auto_pilot=args.auto)
     except Exception as e:
