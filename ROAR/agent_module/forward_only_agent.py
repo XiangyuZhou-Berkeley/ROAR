@@ -4,6 +4,7 @@ from ROAR.agent_module.agent import Agent
 from ROAR.utilities_module.data_structures_models import SensorsData
 from ROAR.utilities_module.vehicle_models import Vehicle, VehicleControl
 from ROAR.configurations.configuration import Configuration as AgentConfig
+import logging
 from ROAR.control_module.pid_controller import PIDController
 import cv2
 import numpy as np
@@ -12,6 +13,9 @@ import numpy as np
 class ForwardOnlyAgent(Agent):
     def __init__(self, vehicle: Vehicle, agent_settings: AgentConfig, **kwargs):
         super().__init__(vehicle, agent_settings, **kwargs)
+        self.agent_settings.save_sensor_data = True
+        super().__init__(vehicle, agent_settings, **kwargs)
+        self.logger = logging.getLogger("Recording Agent")
         self._error_buffer = deque(maxlen=10)
         self._dt = 0.03
 
@@ -28,7 +32,7 @@ class ForwardOnlyAgent(Agent):
 
     def calculate_throttle(self, target_speed):
         current_speed = self.vehicle.get_speed(self.vehicle)
-        k_p, k_d, k_i = 0.1, 0.1, 0
+        k_p, k_d, k_i = 0.3, 0.2, 0
         error = target_speed - current_speed
         print("current speed = " + str(current_speed) + " ; error = " + str(error))
 
