@@ -17,6 +17,7 @@ from typing import Dict, Any
 from datetime import datetime
 import threading
 from ROAR.utilities_module.camera_models import Camera
+import timeit
 
 
 class Agent(ABC):
@@ -224,7 +225,8 @@ class Agent(ABC):
             self.logger.error(
                 f"Failed to save at Frame {self.time_counter}. Error: {e}")
         try:
-            self.transform_file.write(self.vehicle.transform.record() + "\n")
+            tt = timeit.timeit()
+            self.transform_file.write(self.vehicle.transform.record() + "," + f"{tt}" + "\n")
         except Exception as e:
             self.logger.error(
                 f"Failed to save at Frame {self.time_counter}. Error: {e}")

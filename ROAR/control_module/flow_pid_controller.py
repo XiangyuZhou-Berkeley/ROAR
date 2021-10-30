@@ -34,8 +34,8 @@ class FlowPIDController(Controller):
 
     def run_in_series(self, **kwargs) -> VehicleControl:
         throttle = self.long_pid_controller.run_in_series(target_speed=kwargs.get("target_speed", self.max_speed))
-        steering = self.lat_pid_controller.run_in_series()
-        return VehicleControl(throttle=throttle, steering=steering)
+        #steering = self.lat_pid_controller.run_in_series()
+        return VehicleControl(throttle=throttle, steering=0)
 
     @staticmethod
     def find_k_values(vehicle: Vehicle, config: dict) -> np.array:
@@ -63,9 +63,13 @@ class LongPIDController(Controller):
     def run_in_series(self, **kwargs) -> float:
         target_speed = min(self.max_speed, kwargs.get("target_speed", self.max_speed))
         current_speed = Vehicle.get_speed(self.agent.vehicle)
+        print("current_speed" + str(current_speed))
 
         k_p, k_d, k_i = FlowPIDController.find_k_values(vehicle=self.agent.vehicle, config=self.config)
         error = target_speed - current_speed
+        print("Error speed: " + str(error))
+        print("Target speed: " + str(target_speed))
+        print("kp kd ki = " + str(k_p) + " " + str(k_d))
 
         self._error_buffer.append(error)
 
@@ -76,8 +80,10 @@ class LongPIDController(Controller):
         else:
             _de = 0.0
             _ie = 0.0
+        print("d" + str(_de))
         output = float(np.clip((k_p * error) + (k_d * _de) + (k_i * _ie), self.throttle_boundary[0],
                                self.throttle_boundary[1]))
+        print("throttle" +str(output))
         # self.logger.debug(f"curr_speed: {round(current_speed, 2)} | kp: {round(k_p, 2)} | kd: {k_d} | ki = {k_i} | "
         #       f"err = {round(error, 2)} | de = {round(_de, 2)} | ie = {round(_ie, 2)}")
         # f"self._error_buffer[-1] {self._error_buffer[-1]} | self._error_buffer[-2] = {self._error_buffer[-2]}")

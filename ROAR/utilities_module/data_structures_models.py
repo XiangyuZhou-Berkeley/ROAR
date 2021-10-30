@@ -4,7 +4,7 @@ from scipy.spatial import distance
 from typing import Union, Optional
 from typing import List
 from ROAR.utilities_module.utilities import rotation_matrix_from_euler
-
+import timeit
 
 class Location(BaseModel):
     x: float = Field(
