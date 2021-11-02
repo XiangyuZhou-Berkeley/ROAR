@@ -1,0 +1,1322 @@
+pygame 2.0.2 (SDL 2.0.16, Python 3.7.11)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+current_speed0.008770486943960746
+Error speed: 17.99122951305604
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.5397368853916812
+current_speed0.008770486943960746
+Error speed: 17.99122951305604
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.5397368853916812
+current_speed0.0027666681455193196
+Error speed: 17.99723333185448
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d-0.20012729328134546
+throttle0.5398769744969782
+current_speed0.0027666681455193196
+Error speed: 17.99723333185448
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.5399169999556345
+current_speed0.009447184106619487
+Error speed: 17.99055281589338
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d0.2226838653700251
+throttle0.5397611212498754
+current_speed0.0027280050719480017
+Error speed: 17.997271994928052
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d-0.2239726344890632
+throttle0.5398733653209438
+current_speed0.0018840808308778158
+Error speed: 17.998115919169123
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d-0.028130808035697896
+throttle0.5399378514134665
+current_speed0.004368132812447234
+Error speed: 17.99563186718755
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d0.08280173271906222
+throttle0.5398855163621704
+current_speed0.006000379325622817
+Error speed: 17.993999620674376
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d0.0544082171058354
+throttle0.5398308702636524
+current_speed0.006000379325622817
+Error speed: 17.993999620674376
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.5398199886202313
+current_speed0.3000645340444132
+Error speed: 17.699935465955587
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d9.802138490626316
+throttle0.5329584916767928
+current_speed1.2403778987193494
+Error speed: 16.75962210128065
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d31.343778822497846
+throttle0.5090574188029191
+current_speed1.957403033448506
+Error speed: 16.042596966551493
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d23.9008378243053
+throttle0.4860580765614058
+current_speed3.4567263098166756
+Error speed: 14.543273690183325
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d49.9774425456056
+throttle0.44629369921462086
+current_speed4.347342247523364
+Error speed: 13.652657752476635
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d29.68719792355632
+throttle0.4155171721590103
+current_speed4.347342247523364
+Error speed: 13.652657752476635
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.409579732574299
+current_speed6.994592467911776
+Error speed: 11.005407532088224
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d88.24167401294704
+throttle0.34781056076523614
+current_speed7.301042409751973
+Error speed: 10.698957590248028
+Target speed: 18
+kp kd ki = 0.03 0.0002
+d10.21499806133986
+throttle0.3230117273197088
+current_speed8.340667055812935
+Error speed: 9.659332944187065
+Target speed: 18
+kp kd ki = 0.08 0.0002
+d34.65415486869876
+throttle0.779677466508705
+current_speed9.882202911078087
+Error speed: 8.117797088921913
+Target speed: 18
+kp kd ki = 0.08 0.0002
+d51.38452850883842
+throttle0.6597006728155207
+current_speed10.515465572549658
+Error speed: 7.484534427450342
+Target speed: 18
+kp kd ki = 0.08 0.0002
+d21.108755382385702
+throttle0.6029845052725045
+current_speed10.515465572549658
+Error speed: 7.484534427450342
+Target speed: 18
+kp kd ki = 0.08 0.0002
+d0.0
+throttle0.5987627541960273
+current_speed12.986803481646618
+Error speed: 5.013196518353382
+Target speed: 18
+kp kd ki = 0.15 0.0002
+d82.37793030323199
+throttle0.7684550638136537
+current_speed13.578181871979446
+Error speed: 4.421818128020554
+Target speed: 18
+kp kd ki = 0.15 0.0002
+d19.71261301109427
+throttle0.6672152418053019
+current_speed14.421755229331707
+Error speed: 3.5782447706682934
+Target speed: 18
+kp kd ki = 0.15 0.0002
+d28.119111911742028
+throttle0.5423605379825923
+current_speed14.494199034948743
+Error speed: 3.5058009650512574
+Target speed: 18
+kp kd ki = 0.15 0.0002
+d2.414793520567867
+throttle0.5263531034618021
+current_speed15.29964837080103
+Error speed: 2.7003516291989698
+Target speed: 18
+kp kd ki = 0.08 0.0003
+d26.848311195076256
+throttle0.22408262369444046
+current_speed15.29964837080103
+Error speed: 2.7003516291989698
+Target speed: 18
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.21602813033591758
+current_speed17.08445452291981
+Error speed: 0.9155454770801903
+Target speed: 18
+kp kd ki = 0.08 0.0003
+d59.49353840395932
+throttle0.09109169968760303
+current_speed17.121509415614792
+Error speed: 0.878490584385208
+Target speed: 18
+kp kd ki = 0.08 0.0003
+d1.2351630898327435
+throttle0.07064979567776646
+current_speed18.81937783216562
+Error speed: -18.81937783216562
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d656.5956138850277
+throttle0.0
+current_speed19.16443405614527
+Error speed: -19.16443405614527
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d11.501874132655015
+throttle0.0
+current_speed19.16443405614527
+Error speed: -19.16443405614527
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed19.433996041026862
+Error speed: -19.433996041026862
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d8.98539949605303
+throttle0.0
+current_speed20.78609824825542
+Error speed: -20.78609824825542
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d45.070073574285274
+throttle0.0
+current_speed20.78609824825542
+Error speed: -20.78609824825542
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed22.508036882782605
+Error speed: -22.508036882782605
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d57.39795448423948
+throttle0.0
+current_speed22.652503303859177
+Error speed: -22.652503303859177
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d4.815547369219075
+throttle0.0
+current_speed22.652503303859177
+Error speed: -22.652503303859177
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed23.778264772160245
+Error speed: -23.778264772160245
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d37.52538227670227
+throttle0.0
+current_speed22.704548600178203
+Error speed: -22.704548600178203
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d-35.79053906606807
+throttle0.0
+current_speed22.704548600178203
+Error speed: -22.704548600178203
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed21.080892899380952
+Error speed: -21.080892899380952
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d-54.121856693241696
+throttle0.0
+current_speed22.818047486819662
+Error speed: -22.818047486819662
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d57.905152914623656
+throttle0.0
+current_speed22.818047486819662
+Error speed: -22.818047486819662
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed21.855621043780758
+Error speed: -21.855621043780758
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d-32.080881434630136
+throttle0.0
+current_speed21.855621043780758
+Error speed: -21.855621043780758
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed21.855621043780758
+Error speed: -21.855621043780758
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed19.667888267167694
+Error speed: -19.667888267167694
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d-72.92442588710215
+throttle0.0
+current_speed19.86373680675195
+Error speed: -19.86373680675195
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d6.528284652808599
+throttle0.0
+current_speed19.148685449650856
+Error speed: -19.148685449650856
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d-23.835045236703206
+throttle0.0
+current_speed18.923209146162307
+Error speed: -18.923209146162307
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d-7.515876782951618
+throttle0.0
+current_speed18.923209146162307
+Error speed: -18.923209146162307
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed18.923209146162307
+Error speed: -18.923209146162307
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed17.4950991910505
+Error speed: -17.4950991910505
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d-47.60366517039358
+throttle0.0
+current_speed17.513999802537512
+Error speed: -17.513999802537512
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.6300203829004166
+throttle0.0
+current_speed17.513999802537512
+Error speed: -17.513999802537512
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed16.51323724897007
+Error speed: -16.51323724897007
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d-33.35875178558136
+throttle0.0
+current_speed17.47146919031843
+Error speed: -17.47146919031843
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d31.941064711611965
+throttle0.0
+current_speed16.233727988114698
+Error speed: -16.233727988114698
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d-41.25804007345776
+throttle0.0
+current_speed14.121724934073812
+Error speed: -14.121724934073812
+Target speed: 0
+kp kd ki = 0.15 0.0002
+d-70.40010180136284
+throttle0.0
+current_speed16.612322992011745
+Error speed: -16.612322992011745
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d83.01993526459773
+throttle0.0
+current_speed14.343566843014521
+Error speed: -14.343566843014521
+Target speed: 0
+kp kd ki = 0.15 0.0002
+d-75.62520496657412
+throttle0.0
+current_speed15.473138340002386
+Error speed: -15.473138340002386
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d37.65238323292882
+throttle0.0
+current_speed15.473138340002386
+Error speed: -15.473138340002386
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed15.473138340002386
+Error speed: -15.473138340002386
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d0.0
+throttle0.0
+current_speed13.251547447531982
+Error speed: -13.251547447531982
+Target speed: 0
+kp kd ki = 0.15 0.0002
+d-74.05302974901348
+throttle0.0
+current_speed13.43377579126634
+Error speed: -13.43377579126634
+Target speed: 0
+kp kd ki = 0.15 0.0002
+d6.07427812447862
+throttle0.0
+current_speed13.319505505859352
+Error speed: -13.319505505859352
+Target speed: 0
+kp kd ki = 0.15 0.0002
+d-3.8090095135662714
+throttle0.0
+current_speed13.319505505859352
+Error speed: -13.319505505859352
+Target speed: 0
+kp kd ki = 0.15 0.0002
+d0.0
+throttle0.0
+current_speed12.347128497383384
+Error speed: -12.347128497383384
+Target speed: 0
+kp kd ki = 0.15 0.0002
+d-32.41256694919894
+throttle0.0
+current_speed12.347128497383384
+Error speed: -12.347128497383384
+Target speed: 0
+kp kd ki = 0.15 0.0002
+d0.0
+throttle0.0
+current_speed11.587600042584102
+Error speed: -11.587600042584102
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d-25.317615159976075
+throttle0.0
+current_speed11.9101375445055
+Error speed: -11.9101375445055
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d10.75125006404664
+throttle0.0
+current_speed11.9101375445055
+Error speed: -11.9101375445055
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d0.0
+throttle0.0
+current_speed10.123838560169595
+Error speed: -10.123838560169595
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d-59.54329947786352
+throttle0.0
+current_speed10.123838560169595
+Error speed: -10.123838560169595
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d0.0
+throttle0.0
+current_speed10.123838560169595
+Error speed: -10.123838560169595
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d0.0
+throttle0.0
+current_speed16.810883240600916
+Error speed: -16.810883240600916
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d222.90148934771068
+throttle0.0
+current_speed10.068563384820605
+Error speed: -10.068563384820605
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d-224.74399519267703
+throttle0.0
+current_speed6.781330662499654
+Error speed: -6.781330662499654
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-109.57442407736504
+throttle0.0
+current_speed6.781330662499654
+Error speed: -6.781330662499654
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed15.128403990527369
+Error speed: -15.128403990527369
+Target speed: 0
+kp kd ki = 0.08 0.0003
+d278.2357776009238
+throttle0.0
+current_speed6.17507647823147
+Error speed: -6.17507647823147
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-298.44425040986334
+throttle0.0
+current_speed12.392067008276431
+Error speed: -12.392067008276431
+Target speed: 0
+kp kd ki = 0.15 0.0002
+d207.23301766816536
+throttle0.0
+current_speed8.069221209439753
+Error speed: -8.069221209439753
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d-144.0948599612226
+throttle0.0
+current_speed5.67014665554023
+Error speed: -5.67014665554023
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-79.96915179665078
+throttle0.0
+current_speed5.67014665554023
+Error speed: -5.67014665554023
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed11.130006608379267
+Error speed: -11.130006608379267
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d181.99533176130123
+throttle0.0
+current_speed11.130006608379267
+Error speed: -11.130006608379267
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d0.0
+throttle0.0
+current_speed9.574775394028801
+Error speed: -9.574775394028801
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d-51.84104047834885
+throttle0.0
+current_speed6.098881792237127
+Error speed: -6.098881792237127
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-115.86312005972249
+throttle0.0
+current_speed4.398780415545501
+Error speed: -4.398780415545501
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-56.67004588972088
+throttle0.0
+current_speed4.398780415545501
+Error speed: -4.398780415545501
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed8.80362026048457
+Error speed: -8.80362026048457
+Target speed: 0
+kp kd ki = 0.08 0.0002
+d146.8279948313023
+throttle0.0
+current_speed3.8917019257909864
+Error speed: -3.8917019257909864
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-163.73061115645277
+throttle0.0
+current_speed7.2395110515509655
+Error speed: -7.2395110515509655
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d111.59363752533264
+throttle0.0
+current_speed4.67965206309124
+Error speed: -4.67965206309124
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-85.32863294865753
+throttle0.0
+current_speed3.367889428901525
+Error speed: -3.367889428901525
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-43.725421139657165
+throttle0.0
+current_speed3.367889428901525
+Error speed: -3.367889428901525
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed6.120787680086481
+Error speed: -6.120787680086481
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d91.76327503949855
+throttle0.0
+current_speed2.630477451458356
+Error speed: -2.630477451458356
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-116.34367428760419
+throttle0.0
+current_speed4.908694939572388
+Error speed: -4.908694939572388
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d75.9405829371344
+throttle0.0
+current_speed3.005422504411687
+Error speed: -3.005422504411687
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-63.44241450535669
+throttle0.0
+current_speed2.08780356026352
+Error speed: -2.08780356026352
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-30.587298138272228
+throttle0.0
+current_speed3.895623403351571
+Error speed: -3.895623403351571
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d60.260661436268364
+throttle0.0
+current_speed3.895623403351571
+Error speed: -3.895623403351571
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed1.4659926206578135
+Error speed: -1.4659926206578135
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-80.98769275645859
+throttle0.0
+current_speed2.6035751490116086
+Error speed: -2.6035751490116086
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d37.91941761179317
+throttle0.0
+current_speed1.459986037507546
+Error speed: -1.459986037507546
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-38.119637050135424
+throttle0.0
+current_speed0.9490301753577992
+Error speed: -0.9490301753577992
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-17.031862071658225
+throttle0.0
+current_speed1.5633094063382866
+Error speed: -1.5633094063382866
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d20.47597436601625
+throttle0.0
+current_speed1.5633094063382866
+Error speed: -1.5633094063382866
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.4019459150259463
+Error speed: -0.4019459150259463
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-38.71211637707801
+throttle0.0
+current_speed0.25431579809496496
+Error speed: -0.25431579809496496
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-4.921003897699378
+throttle0.0
+current_speed0.09064296942774393
+Error speed: -0.09064296942774393
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-5.455760955574035
+throttle0.0
+current_speed0.06163646371756601
+Error speed: -0.06163646371756601
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.9668835236725973
+throttle0.0
+current_speed0.02963400400138528
+Error speed: -0.02963400400138528
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-1.0667486572060243
+throttle0.0
+current_speed0.02963400400138528
+Error speed: -0.02963400400138528
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.15472613205159752
+Error speed: -0.15472613205159752
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d4.1697376016737415
+throttle0.0
+current_speed0.16064177112827527
+Error speed: -0.16064177112827527
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.1971879692225916
+throttle0.0
+current_speed0.2769139242439896
+Error speed: -0.2769139242439896
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d3.8757384371904773
+throttle0.0
+current_speed0.12063008675643462
+Error speed: -0.12063008675643462
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-5.209461249585166
+throttle0.0
+current_speed0.11084737618613176
+Error speed: -0.11084737618613176
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.3260903523434287
+throttle0.0
+current_speed0.11084737618613176
+Error speed: -0.11084737618613176
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.09107605584831747
+Error speed: -0.09107605584831747
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.6590440112604762
+throttle0.0
+current_speed0.07889482710087183
+Error speed: -0.07889482710087183
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.4060409582481883
+throttle0.0
+current_speed0.07016270982962652
+Error speed: -0.07016270982962652
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.29107057570817674
+throttle0.0
+current_speed0.03181377932648458
+Error speed: -0.03181377932648458
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-1.2782976834380648
+throttle0.0
+current_speed0.02283506135864303
+Error speed: -0.02283506135864303
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.2992905989280518
+throttle0.0
+current_speed0.02283506135864303
+Error speed: -0.02283506135864303
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.027627752636425806
+Error speed: -0.027627752636425806
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.1597563759260926
+throttle0.0
+current_speed0.027469437613247397
+Error speed: -0.027469437613247397
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.005277167439280325
+throttle0.0
+current_speed0.06557277039864574
+Error speed: -0.06557277039864574
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d1.2701110928466117
+throttle0.0
+current_speed0.030979039322383925
+Error speed: -0.030979039322383925
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-1.1531243692087274
+throttle0.0
+current_speed0.033645960343405494
+Error speed: -0.033645960343405494
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.08889736736738564
+throttle0.0
+current_speed0.033645960343405494
+Error speed: -0.033645960343405494
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.018427881767260866
+Error speed: -0.018427881767260866
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.5072692858714877
+throttle0.0
+current_speed0.023418858954895254
+Error speed: -0.023418858954895254
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.1663659062544796
+throttle0.0
+current_speed0.023418858954895254
+Error speed: -0.023418858954895254
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.051763222764398306
+Error speed: -0.051763222764398306
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.9448121269834351
+throttle0.0
+current_speed0.02814373182009892
+Error speed: -0.02814373182009892
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.7873163648099796
+throttle0.0
+current_speed0.02814373182009892
+Error speed: -0.02814373182009892
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.027267282278282037
+Error speed: -0.027267282278282037
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.02921498472722948
+throttle0.0
+current_speed0.03421313421422296
+Error speed: -0.03421313421422296
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.2315283978646974
+throttle0.0
+current_speed0.0232461959509546
+Error speed: -0.0232461959509546
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.3655646087756119
+throttle0.0
+current_speed0.03342628280367065
+Error speed: -0.03342628280367065
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.3393362284238684
+throttle0.0
+current_speed0.03910721843334623
+Error speed: -0.03910721843334623
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.18936452098918602
+throttle0.0
+current_speed0.03910721843334623
+Error speed: -0.03910721843334623
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.03270984138710801
+Error speed: -0.03270984138710801
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.21324590154127415
+throttle0.0
+current_speed0.03270984138710801
+Error speed: -0.03270984138710801
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.02401124837253858
+Error speed: -0.02401124837253858
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.28995310048564765
+throttle0.0
+current_speed0.011796325470922053
+Error speed: -0.011796325470922053
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.40716409672055087
+throttle0.0
+current_speed0.014211213867517149
+Error speed: -0.014211213867517149
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0804962798865032
+throttle0.0
+current_speed0.014211213867517149
+Error speed: -0.014211213867517149
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.02256142752889406
+Error speed: -0.02256142752889406
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.27834045537923036
+throttle0.0
+current_speed0.03409570058745529
+Error speed: -0.03409570058745529
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.3844757686187078
+throttle0.0
+current_speed0.03409570058745529
+Error speed: -0.03409570058745529
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.00955601732099559
+Error speed: -0.00955601732099559
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.8179894422153234
+throttle0.0
+current_speed0.01403991766359192
+Error speed: -0.01403991766359192
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.14946334475321102
+throttle0.0
+current_speed0.01403991766359192
+Error speed: -0.01403991766359192
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.01403991766359192
+Error speed: -0.01403991766359192
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.02258503925465437
+Error speed: -0.02258503925465437
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.2848373863687484
+throttle0.0
+current_speed0.012649033238651046
+Error speed: -0.012649033238651046
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.33120020053344423
+throttle0.0
+current_speed0.012649033238651046
+Error speed: -0.012649033238651046
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.07401263308955656
+Error speed: -0.07401263308955656
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d2.0454533283635175
+throttle0.0
+current_speed0.07401263308955656
+Error speed: -0.07401263308955656
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.07401263308955656
+Error speed: -0.07401263308955656
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.09895190299928008
+Error speed: -0.09895190299928008
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.831308996990784
+throttle0.0
+current_speed0.04500970749113994
+Error speed: -0.04500970749113994
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-1.7980731836046717
+throttle0.0
+current_speed0.04500970749113994
+Error speed: -0.04500970749113994
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.04399398387850111
+Error speed: -0.04399398387850111
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.033857453754627495
+throttle0.0
+current_speed0.04399398387850111
+Error speed: -0.04399398387850111
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.0038267139407796567
+Error speed: -0.0038267139407796567
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-1.3389089979240485
+throttle0.0
+current_speed0.0024017567087586647
+Error speed: -0.0024017567087586647
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.04749857440069973
+throttle0.0
+current_speed0.005956537603121308
+Error speed: -0.005956537603121308
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.11849269647875477
+throttle0.0
+current_speed0.005956537603121308
+Error speed: -0.005956537603121308
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.01988010915962811
+Error speed: -0.01988010915962811
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.46411905188356006
+throttle0.0
+current_speed0.01988010915962811
+Error speed: -0.01988010915962811
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.01988010915962811
+Error speed: -0.01988010915962811
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.03336145197635448
+Error speed: -0.03336145197635448
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.4493780938908789
+throttle0.0
+current_speed0.02123784366442885
+Error speed: -0.02123784366442885
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.4041202770641875
+throttle0.0
+current_speed0.01722268544925508
+Error speed: -0.01722268544925508
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.1338386071724591
+throttle0.0
+current_speed0.01722268544925508
+Error speed: -0.01722268544925508
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.09649329130805968
+Error speed: -0.09649329130805968
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d2.64235352862682
+throttle0.0
+current_speed0.030007463137184467
+Error speed: -0.030007463137184467
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-2.216194272362507
+throttle0.0
+current_speed0.030007463137184467
+Error speed: -0.030007463137184467
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.0076795438157023525
+Error speed: -0.0076795438157023525
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.7442639773827371
+throttle0.0
+current_speed0.0025280383753791148
+Error speed: -0.0025280383753791148
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.1717168480107746
+throttle0.0
+current_speed0.017451330230376327
+Error speed: -0.017451330230376327
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.49744306183324044
+throttle0.0
+current_speed0.017451330230376327
+Error speed: -0.017451330230376327
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.017451330230376327
+Error speed: -0.017451330230376327
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.013213004236964226
+Error speed: -0.013213004236964226
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.14127753311373667
+throttle0.0
+current_speed0.013213004236964226
+Error speed: -0.013213004236964226
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.01230941652407374
+Error speed: -0.01230941652407374
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.030119590429682902
+throttle0.0
+current_speed0.011956216062893734
+Error speed: -0.011956216062893734
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.011773348706000178
+throttle0.0
+current_speed0.014967491036497185
+Error speed: -0.014967491036497185
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.10037583245344836
+throttle0.0
+current_speed0.014967491036497185
+Error speed: -0.014967491036497185
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.01715681545741142
+Error speed: -0.01715681545741142
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.07297748069714118
+throttle0.0
+current_speed0.01715681545741142
+Error speed: -0.01715681545741142
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.00980476562281192
+Error speed: -0.00980476562281192
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.24506832781998333
+throttle0.0
+current_speed0.002535434808158853
+Error speed: -0.002535434808158853
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.24231102715510225
+throttle0.0
+current_speed0.001460057321090241
+Error speed: -0.001460057321090241
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.0358459162356204
+throttle0.0
+current_speed0.001460057321090241
+Error speed: -0.001460057321090241
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.0039781220875823
+Error speed: -0.0039781220875823
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.08393549221640195
+throttle0.0
+current_speed0.0039781220875823
+Error speed: -0.0039781220875823
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.008888890656183583
+Error speed: -0.008888890656183583
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.1636922856200428
+throttle0.0
+current_speed0.008322527430505633
+Error speed: -0.008322527430505633
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.01887877418926502
+throttle0.0
+current_speed0.024032945116479357
+Error speed: -0.024032945116479357
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.5236805895324576
+throttle0.0
+current_speed0.024032945116479357
+Error speed: -0.024032945116479357
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.024032945116479357
+Error speed: -0.024032945116479357
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.019071124998071176
+Error speed: -0.019071124998071176
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.16539400394693937
+throttle0.0
+current_speed0.019071124998071176
+Error speed: -0.019071124998071176
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.030306547906172127
+Error speed: -0.030306547906172127
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.37451409693669835
+throttle0.0
+current_speed0.030306547906172127
+Error speed: -0.030306547906172127
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.03697408948091352
+Error speed: -0.03697408948091352
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.2222513858247131
+throttle0.0
+current_speed0.03697408948091352
+Error speed: -0.03697408948091352
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.0
+throttle0.0
+current_speed0.006613711472893474
+Error speed: -0.006613711472893474
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-1.0120126002673349
+throttle0.0
+current_speed0.002221853490281544
+Error speed: -0.002221853490281544
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d-0.14639526608706435
+throttle0.0
+current_speed0.005273238745720595
+Error speed: -0.005273238745720595
+Target speed: 0
+kp kd ki = 0.03 0.0002
+d0.10171284184796837
+throttle0.0
