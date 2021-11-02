@@ -8,6 +8,7 @@ from ROAR.control_module.flow_pid_controller import FlowPIDController
 import cv2
 import numpy as np
 import logging
+from datetime import datetime
 
 class FlowAgent(Agent):
     def __init__(self, vehicle: Vehicle, agent_settings: AgentConfig, **kwargs):
@@ -22,40 +23,39 @@ class FlowAgent(Agent):
         self.target_speed = 18 # in km/h
         # self.kwargs.__setitem__("target_speed", self.target_speed)
         self.break_state = False
+        self.vehicle = vehicle
+        self.write_meta_data()
+        self.vehicle_control = VehicleControl()
 
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
         super(FlowAgent,self).run_step(sensors_data=sensors_data, vehicle=vehicle)
 
-        self.logger.info(self.vehicle.get_speed(self.vehicle))
         if self.vehicle.get_speed(self.vehicle) >= self.target_speed:
-            self.break_state = True
+            self.target_speed = 0
             self.logger.info("Start breaking")
 
-        if self.break_state:
-            return self.pid_controller.run_in_series(target_speed=0)
-        else:
-            return self.pid_controller.run_in_series(target_speed=self.target_speed)
+        self.vehicle_control = self.pid_controller.run_in_series(target_speed=self.target_speed)
+        return self.vehicle_control
 
+    def write_meta_data(self):
+        vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data.csv").open(mode='w')
+        vehicle_state_file.write("t,vx,vy,vz,v_ref,x,y,z,throttle,kp,ki,kd\n")
+        vehicle_state_file.close()
 
-    def calculate_throttle(self, target_speed):
-        current_speed = self.vehicle.get_speed(self.vehicle)
-        k_p, k_d, k_i = 0.1, 0.1, 0
-        error = target_speed - current_speed
-        print("current speed = " + str(current_speed) + " ; error = " + str(error))
-
-        self._error_buffer.append(error)
-
-        if len(self._error_buffer) >= 2:
-            # print(self._error_buffer[-1], self._error_buffer[-2])
-            _de = (self._error_buffer[-2] - self._error_buffer[-1]) / self._dt
-            _ie = sum(self._error_buffer) * self._dt
-        else:
-            _de = 0.0
-            _ie = 0.0
-        output = float(np.clip((k_p * error) + (k_d * _de) + (k_i * _ie), 0,
-                               0.3))
-        # self.logger.debug(f"curr_speed: {round(current_speed, 2)} | kp: {round(k_p, 2)} | kd: {k_d} | ki = {k_i} | "
-        #       f"err = {round(error, 2)} | de = {round(_de, 2)} | ie = {round(_ie, 2)}")
-        # f"self._error_buffer[-1] {self._error_buffer[-1]} | self._error_buffer[-2] = {self._error_buffer[-2]}")
-        print("output=" + str(output))
-        return output
+    def write_current_data(self):
+        vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data.csv").open(mode='a+')
+        t = datetime.now().time()
+        vx = self.vehicle.velocity.x
+        vy = self.vehicle.velocity.y
+        vz = self.vehicle.velocity.z
+        x = self.vehicle.transform.location.x
+        y = self.vehicle.transform.location.y
+        z = self.vehicle.transform.location.z
+        v_ref = self.target_speed
+        throttle = self.vehicle_control.get_throttle()
+        controller = self.pid_controller.long_pid_controller
+        kp = controller.kp
+        ki = controller.ki
+        kd = controller.kd
+        vehicle_state_file.write(f"{t},{vx},{vy},{vz},{v_ref},{x},{y},{z},{throttle},{kp},{ki},{kd}\n")
+        vehicle_state_file.close()

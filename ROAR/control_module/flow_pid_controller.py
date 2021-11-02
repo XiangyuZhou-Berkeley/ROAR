@@ -57,6 +57,9 @@ class LongPIDController(Controller):
         self.max_speed = max_speed
         self.throttle_boundary = throttle_boundary
         self._error_buffer = deque(maxlen=10)
+        self.kp = 0
+        self.ki = 0
+        self.kd = 0
 
         self._dt = dt
 
@@ -66,6 +69,10 @@ class LongPIDController(Controller):
         print("current_speed" + str(current_speed))
 
         k_p, k_d, k_i = FlowPIDController.find_k_values(vehicle=self.agent.vehicle, config=self.config)
+        self.kp = k_p
+        self.kd = k_d
+        self.ki = k_i
+
         error = target_speed - current_speed
         print("Error speed: " + str(error))
         print("Target speed: " + str(target_speed))
