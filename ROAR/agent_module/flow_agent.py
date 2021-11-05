@@ -35,15 +35,16 @@ class FlowAgent(Agent):
             self.logger.info("Start breaking")
 
         self.vehicle_control = self.pid_controller.run_in_series(target_speed=self.target_speed)
+        self.write_current_data()
         return self.vehicle_control
 
     def write_meta_data(self):
-        vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data.csv").open(mode='w')
+        vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data2.csv").open(mode='w')
         vehicle_state_file.write("t,vx,vy,vz,v_ref,x,y,z,throttle,kp,ki,kd\n")
         vehicle_state_file.close()
 
     def write_current_data(self):
-        vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data.csv").open(mode='a+')
+        vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data2.csv").open(mode='a+')
         t = datetime.now().time()
         vx = self.vehicle.velocity.x
         vy = self.vehicle.velocity.y
