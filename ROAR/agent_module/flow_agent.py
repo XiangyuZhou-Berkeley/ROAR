@@ -36,10 +36,10 @@ class FlowAgent(Agent):
 
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
         super(FlowAgent,self).run_step(sensors_data=sensors_data, vehicle=vehicle)
+        self.time_counter += 1
         if (self.time_counter % 20 == 0):
             self.write_current_data()
             self.current_data_list = []
-        self.time_counter += 1
         if self.vehicle.get_speed(self.vehicle) >= self.target_speed:
             self.target_speed = 0
             self.logger.info("Start braking")
