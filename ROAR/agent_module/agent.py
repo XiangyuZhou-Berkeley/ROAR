@@ -197,7 +197,7 @@ class Agent(ABC):
             None
         """
         now = datetime.now().strftime('%m_%d_%Y_%H_%M_%S_%f')
-        self.logger.info(f"Saving sensor data -> {now}")
+        # self.logger.info(f"Saving sensor data -> {now}")
 
         try:
             if self.front_rgb_camera is not None and self.front_rgb_camera.data is not None:

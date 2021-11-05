@@ -25,22 +25,21 @@ class FlowAgent(Agent):
         # self.kwargs.__setitem__("target_speed", self.target_speed)
         self.break_state = False
         self.vehicle = vehicle
-        self.write_meta_data()
         self.vehicle_control = VehicleControl()
-        self.time_start = time.time()
         self.time_counter = 0
         self.current_data_list = []
-        self.data_file_path = self.vehicle_state_output_folder_path / "flow_data" / f"{datetime.now().strftime('%m_%d_%Y_%H')}.csv"
+        self.data_file_path = ""
+        self.time_start = time.time()
+        self.write_meta_data()
 
 
 
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
         super(FlowAgent,self).run_step(sensors_data=sensors_data, vehicle=vehicle)
-        self.time_counter += 1
         if (self.time_counter % 20 == 0):
             self.write_current_data()
             self.current_data_list = []
-
+        self.time_counter += 1
         if self.vehicle.get_speed(self.vehicle) >= self.target_speed:
             self.target_speed = 0
             self.logger.info("Start braking")
@@ -51,13 +50,14 @@ class FlowAgent(Agent):
 
     def write_meta_data(self):
         # vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data2.csv").open(mode='w')
-        vehicle_state_file = self.data_file_path.open('w+')
+        self.data_file_path = self.vehicle_state_output_folder_path / "flow_data" / f"{datetime.now().strftime('%m-%d-%H:%M:%S')}.csv"
+        vehicle_state_file = (self.data_file_path).open('w')
         vehicle_state_file.write("t,vx,vy,vz,v_ref,x,y,z,throttle,kp,ki,kd\n")
         vehicle_state_file.close()
 
     def get_current_data(self):
         # t = datetime.now().time()
-        t = time.time() - self.time_start
+        t = time.time()
         vx = self.vehicle.velocity.x
         vy = self.vehicle.velocity.y
         vz = self.vehicle.velocity.z
@@ -70,10 +70,10 @@ class FlowAgent(Agent):
         kp = controller.kp
         ki = controller.ki
         kd = controller.kd
-        self.current_data_list.append([t, vx, vy, vz, x, y, z, v_ref, throttle, controller, kp, ki, kd])
+        self.current_data_list.append([t, vx, vy, vz, x, y, z, v_ref, throttle, kp, ki, kd])
 
     def write_current_data(self):
-        vehicle_state_file = self.data_file_path.open(mode='a+')
+        vehicle_state_file = (self.data_file_path).open(mode='a+')
         for d in self.current_data_list:
             vehicle_state_file.write(f"{d[0]},{d[1]},{d[2]},{d[3]},{d[4]},{d[5]},{d[6]},{d[7]},{d[8]},{d[9]},{d[10]},{d[11]}\n")
         vehicle_state_file.close()
