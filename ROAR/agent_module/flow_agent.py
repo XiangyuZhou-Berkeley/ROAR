@@ -10,6 +10,7 @@ import numpy as np
 import logging
 from datetime import datetime
 import time
+import os
 
 class FlowAgent(Agent):
     def __init__(self, vehicle: Vehicle, agent_settings: AgentConfig, **kwargs):
@@ -51,6 +52,11 @@ class FlowAgent(Agent):
     def write_meta_data(self):
         # vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data2.csv").open(mode='w')
         self.data_file_path = self.vehicle_state_output_folder_path / "flow_data" / f"{datetime.now().strftime('%m-%d-%H:%M:%S')}.csv"
+        directory = os.path.dirname(self.data_file_path)
+        try:
+            os.stat(directory)
+        except:
+            os.mkdir(directory)
         vehicle_state_file = (self.data_file_path).open('w')
         vehicle_state_file.write("t,vx,vy,vz,v_ref,x,y,z,throttle,kp,ki,kd\n")
         vehicle_state_file.close()
