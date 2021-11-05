@@ -6,6 +6,7 @@ from ROAR.agent_module.agent import Agent
 from ROAR.utilities_module.data_structures_models import SensorsData
 from ROAR.utilities_module.vehicle_models import Vehicle, VehicleControl
 from ROAR.configurations.configuration import Configuration as AgentConfig
+import logging
 from ROAR.control_module.pid_controller import PIDController
 import cv2
 from collections import deque
