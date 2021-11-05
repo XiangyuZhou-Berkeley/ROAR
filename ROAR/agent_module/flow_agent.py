@@ -9,6 +9,7 @@ import cv2
 import numpy as np
 import logging
 from datetime import datetime
+import time
 
 class FlowAgent(Agent):
     def __init__(self, vehicle: Vehicle, agent_settings: AgentConfig, **kwargs):
@@ -26,26 +27,37 @@ class FlowAgent(Agent):
         self.vehicle = vehicle
         self.write_meta_data()
         self.vehicle_control = VehicleControl()
+        self.time_start = time.time()
+        self.time_counter = 0
+        self.current_data_list = []
+        self.data_file_path = self.vehicle_state_output_folder_path / "flow_data" / f"{datetime.now().strftime('%m_%d_%Y_%H')}.csv"
+
+
 
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
         super(FlowAgent,self).run_step(sensors_data=sensors_data, vehicle=vehicle)
+        self.time_counter += 1
+        if (self.time_counter % 20 == 0):
+            self.write_current_data()
+            self.current_data_list = []
 
         if self.vehicle.get_speed(self.vehicle) >= self.target_speed:
             self.target_speed = 0
-            self.logger.info("Start breaking")
+            self.logger.info("Start braking")
 
         self.vehicle_control = self.pid_controller.run_in_series(target_speed=self.target_speed)
-        self.write_current_data()
+        self.get_current_data()
         return self.vehicle_control
 
     def write_meta_data(self):
-        vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data2.csv").open(mode='w')
+        # vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data2.csv").open(mode='w')
+        vehicle_state_file = self.data_file_path.open('w+')
         vehicle_state_file.write("t,vx,vy,vz,v_ref,x,y,z,throttle,kp,ki,kd\n")
         vehicle_state_file.close()
 
-    def write_current_data(self):
-        vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data2.csv").open(mode='a+')
-        t = datetime.now().time()
+    def get_current_data(self):
+        # t = datetime.now().time()
+        t = time.time() - self.time_start
         vx = self.vehicle.velocity.x
         vy = self.vehicle.velocity.y
         vz = self.vehicle.velocity.z
@@ -58,5 +70,10 @@ class FlowAgent(Agent):
         kp = controller.kp
         ki = controller.ki
         kd = controller.kd
-        vehicle_state_file.write(f"{t},{vx},{vy},{vz},{v_ref},{x},{y},{z},{throttle},{kp},{ki},{kd}\n")
+        self.current_data_list.append([t, vx, vy, vz, x, y, z, v_ref, throttle, controller, kp, ki, kd])
+
+    def write_current_data(self):
+        vehicle_state_file = self.data_file_path.open(mode='a+')
+        for d in self.current_data_list:
+            vehicle_state_file.write(f"{d[0]},{d[1]},{d[2]},{d[3]},{d[4]},{d[5]},{d[6]},{d[7]},{d[8]},{d[9]},{d[10]},{d[11]}\n")
         vehicle_state_file.close()
