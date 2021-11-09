@@ -58,7 +58,7 @@ class FlowAgent(Agent):
         except:
             os.mkdir(directory)
         vehicle_state_file = (self.data_file_path).open('w')
-        vehicle_state_file.write("t,vx,vy,vz,v_ref,x,y,z,throttle,kp,ki,kd\n")
+        vehicle_state_file.write("t,vx,vy,vz,x,y,z,v_ref, throttle,kp,ki,kd\n")
         vehicle_state_file.close()
 
     def get_current_data(self):
@@ -70,7 +70,7 @@ class FlowAgent(Agent):
         x = self.vehicle.transform.location.x
         y = self.vehicle.transform.location.y
         z = self.vehicle.transform.location.z
-        v_ref = self.target_speed
+        v_ref = self.target_speed / 3.6
         throttle = self.vehicle_control.get_throttle()
         controller = self.pid_controller.long_pid_controller
         kp = controller.kp
