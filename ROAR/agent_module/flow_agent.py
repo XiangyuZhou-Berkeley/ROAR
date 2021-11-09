@@ -51,7 +51,8 @@ class FlowAgent(Agent):
 
     def write_meta_data(self):
         # vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data2.csv").open(mode='w')
-        self.data_file_path = self.vehicle_state_output_folder_path / "flow_data" / f"{datetime.now().strftime('%m-%d-%H:%M:%S')}.csv"
+        # self.data_file_path = self.vehicle_state_output_folder_path / "flow_data" / f"{datetime.now().strftime('%m-%d-%H:%M:%S')}.csv"
+        self.data_file_path = self.output_folder_path / "flow_data" / f"{datetime.now().strftime('%m-%d-%H:%M:%S')}.csv"
         directory = os.path.dirname(self.data_file_path)
         try:
             os.stat(directory)
