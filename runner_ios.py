@@ -9,6 +9,7 @@ from ROAR_Unity.unity_runner import iOSUnityRunner
 from ROAR.agent_module.special_agents.recording_agent import RecordingAgent
 from ROAR.agent_module.traffic_light_detector_agent import TrafficLightDectectorAgent
 from ROAR.agent_module.aruco_following_agent import ArucoFollowingAgent
+from ROAR.agent_module.udp_multicast_agent import UDPMultiCastAgent
 from ROAR.agent_module.forward_only_agent import ForwardOnlyAgent
 from ROAR.agent_module.flow_agent import FlowAgent
 from ROAR.utilities_module.vehicle_models import Vehicle
