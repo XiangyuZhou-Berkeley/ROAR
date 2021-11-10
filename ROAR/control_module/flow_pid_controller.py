@@ -32,8 +32,10 @@ class FlowPIDController(Controller):
         )
         self.logger = logging.getLogger(__name__)
 
-    def run_in_series(self, **kwargs) -> VehicleControl:
-        throttle = self.long_pid_controller.run_in_series(target_speed=kwargs.get("target_speed", self.max_speed))
+    def run_in_series(self, is_brake, config_b, **kwargs) -> VehicleControl:
+        config_b = json.load(Path(config_b).open(mode='r'))
+        config_b = config_b["longitudinal_controller"]
+        throttle = self.long_pid_controller.run_in_series(is_brake, config_b,target_speed=kwargs.get("target_speed", self.max_speed))
         #steering = self.lat_pid_controller.run_in_series()
         return VehicleControl(throttle=throttle, steering=0)
 
@@ -63,12 +65,16 @@ class LongPIDController(Controller):
 
         self._dt = dt
 
-    def run_in_series(self, **kwargs) -> float:
+    def run_in_series(self,is_brake, config_b, **kwargs) -> float:
         target_speed = min(self.max_speed, kwargs.get("target_speed", self.max_speed))
         current_speed = Vehicle.get_speed(self.agent.vehicle)
         # print("current_speed" + str(current_speed))
 
-        k_p, k_d, k_i = FlowPIDController.find_k_values(vehicle=self.agent.vehicle, config=self.config)
+        if is_brake == False:
+            k_p, k_d, k_i = FlowPIDController.find_k_values(vehicle=self.agent.vehicle, config=self.config)
+        else:
+            k_p, k_d, k_i = FlowPIDController.find_k_values(vehicle=self.agent.vehicle, config=config_b)
+
         self.kp = k_p
         self.kd = k_d
         self.ki = k_i

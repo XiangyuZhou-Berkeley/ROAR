@@ -23,7 +23,7 @@ import numpy as np
 import socket
 import json
 import requests
-
+from pydantic import Field
 
 class mode_list(list):
     # list subclass that uses lower() when testing for 'in'
@@ -115,7 +115,8 @@ if __name__ == '__main__':
                 json.dump(ios_config.dict(), ios_config_file_path.open('w'), indent=4)
 
         if success or args.reconnect is False:
-            agent = FlowAgent(vehicle=Vehicle(), agent_settings=agent_config, should_init_default_cam=True)
+            brake_pid_config = "./ROAR/configurations/carla/brake_pid.json"
+            agent = FlowAgent(vehicle=Vehicle(), agent_settings=agent_config, should_init_default_cam=True, brake_config=brake_pid_config)
             if args.use_unity:
                 runner = iOSUnityRunner(agent=agent, ios_config=ios_config)
             else:

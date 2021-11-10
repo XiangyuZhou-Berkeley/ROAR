@@ -19,8 +19,8 @@ class FlowAgent(Agent):
         super().__init__(vehicle, agent_settings, **kwargs)
         self.logger = logging.getLogger("Recording Agent")
         self._error_buffer = deque(maxlen=10)
-
-        self.pid_controller = FlowPIDController(agent=self, steering_boundary=(-1, 1), throttle_boundary=(0, 1))
+        self.brake_pid_config = kwargs.get("brake_config", "")
+        self.pid_controller = FlowPIDController(agent=self, steering_boundary=(-1, 1), throttle_boundary=(-0.5, 1))
         self._dt = 0.03
         self.target_speed = 18 # in km/h
         # self.kwargs.__setitem__("target_speed", self.target_speed)
@@ -34,18 +34,19 @@ class FlowAgent(Agent):
         self.write_meta_data()
 
 
-
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
         super(FlowAgent,self).run_step(sensors_data=sensors_data, vehicle=vehicle)
         self.time_counter += 1
+        is_brake = False
         if (self.time_counter % 20 == 0):
             self.write_current_data()
             self.current_data_list = []
         if self.vehicle.get_speed(self.vehicle) >= self.target_speed:
             self.target_speed = 0
             self.logger.info("Start braking")
-
-        self.vehicle_control = self.pid_controller.run_in_series(target_speed=self.target_speed)
+            is_brake = True
+        self.vehicle_control = self.pid_controller.run_in_series(is_brake=is_brake, config_b=self.brake_pid_config,
+                                                                 target_speed=self.target_speed)
         self.get_current_data()
         return self.vehicle_control
 
