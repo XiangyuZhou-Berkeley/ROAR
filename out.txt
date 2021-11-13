@@ -1,3 +1,2 @@
-pygame 2.0.2 (SDL 2.0.16, Python 3.7.11)
+pygame 2.0.3 (SDL 2.0.16, Python 3.7.11)
 Hello from the pygame community. https://www.pygame.org/contribute.html
-Something bad happened: Unable to connect to RGB Streamer

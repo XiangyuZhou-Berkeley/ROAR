@@ -32,6 +32,9 @@ class FlowAgent(Agent):
         self.data_file_path = ""
         self.time_start = time.time()
         self.write_meta_data()
+        self.done = False
+        self.t_b = time.time()
+        self.can_brake = False
 
 
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
@@ -41,10 +44,17 @@ class FlowAgent(Agent):
         if (self.time_counter % 20 == 0):
             self.write_current_data()
             self.current_data_list = []
-        if self.vehicle.get_speed(self.vehicle) >= self.target_speed:
-            self.target_speed = 0
+        if self.vehicle.get_speed(self.vehicle) >= self.target_speed and not self.done:
             self.logger.info("Start braking")
-            is_brake = True
+            self.can_brake = True
+            self.t_b = time.time()
+            self.done = True
+        if self.can_brake:
+            t_c = time.time()
+            if (t_c - self.t_b >= 3):
+                is_brake = True
+                self.target_speed = 0
+
         self.vehicle_control = self.pid_controller.run_in_series(is_brake=is_brake, config_b=self.brake_pid_config,
                                                                  target_speed=self.target_speed)
         self.get_current_data()
@@ -75,17 +85,18 @@ class FlowAgent(Agent):
         ax = self.vehicle.acceleration.x
         ay = self.vehicle.acceleration.y
         az = self.vehicle.acceleration.z
-        v_current = self.vehicle.get_speed() / 3.6
+        v_current = self.vehicle.get_speed(self.vehicle) / 3.6
         v_ref = self.target_speed / 3.6
         throttle = self.vehicle_control.get_throttle()
         controller = self.pid_controller.long_pid_controller
-        kp = controller.kp
-        ki = controller.ki
-        kd = controller.kd
+        kp = controller.kp * 3.6
+        ki = controller.ki * 3.6
+        kd = controller.kd * 3.6
         self.current_data_list.append([t, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle, kp, ki, kd])
 
     def write_current_data(self):
         vehicle_state_file = (self.data_file_path).open(mode='a+')
         for d in self.current_data_list:
-            vehicle_state_file.write(f"{d[0]},{d[1]},{d[2]},{d[3]},{d[4]},{d[5]},{d[6]},{d[7]},{d[8]},{d[9]},{d[10]},{d[11]}\n")
+            vehicle_state_file.write(f"{d[0]},{d[1]},{d[2]},{d[3]},{d[4]},{d[5]},{d[6]},{d[7]},{d[8]},{d[9]},{d[10]},{d[11]},"
+                                     f"{d[12]},{d[13]},{d[14]},{d[15]}\n")
         vehicle_state_file.close()

@@ -177,6 +177,7 @@ class iOSUnityRunner:
 
     def on_finish(self):
         self.logger.info("Finishing...")
-        self.control_streamer.send(VehicleControl())
+        for i in range(0,10):
+            self.control_streamer.send(VehicleControl())
         self.agent.shutdown_module_threads()
         self.unity_server.shutdown()
