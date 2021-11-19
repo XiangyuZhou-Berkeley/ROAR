@@ -6,20 +6,21 @@ import logging
 from ROAR.control_module.pid_controller import PIDController
 import cv2
 from collections import deque
-
+import numpy as np
 
 class ForwardOnlyAgent(Agent):
     def __init__(self, vehicle: Vehicle, agent_settings: AgentConfig, **kwargs):
         super().__init__(vehicle, agent_settings, **kwargs)
         self.log = deque(maxlen=100)
+        self.tmp = 1
 
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
         super().run_step(sensors_data=sensors_data, vehicle=vehicle)
         steering = 0
-        return VehicleControl(brake=True)
-        # if self.time_counter > 50:
-        #     return VehicleControl(throttle=0, steering=steering, brake=True)
-        # else:
-        #     return VehicleControl(throttle=-0.5, steering=steering, brake=False)
+        # return VehicleControl(brake=True)
+        if self.time_counter > 50:
+            return VehicleControl(throttle=0, steering=steering, brake=True)
+        else:
+            return VehicleControl(throttle=-0.5, steering=steering, brake=False)
 
 
