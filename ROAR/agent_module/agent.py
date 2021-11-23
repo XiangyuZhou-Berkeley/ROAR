@@ -225,7 +225,7 @@ class Agent(ABC):
         try:
             transform_file = (Path(self.transform_output_folder_path) /
                               f"{datetime.now().strftime('%m_%d_%Y_%H')}.txt").open('a')
-            print(f"Recording -> {self.vehicle.transform.record()}")
+            #print(f"Recording -> {self.vehicle.transform.record()}")
             transform_file.write(self.vehicle.transform.record() + "\n")
             transform_file.close()
         except Exception as e:

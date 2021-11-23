@@ -68,7 +68,7 @@ class LongPIDController(Controller):
     def run_in_series(self,is_brake, config_b, **kwargs) -> float:
         target_speed = min(self.max_speed, kwargs.get("target_speed", self.max_speed))
         current_speed = Vehicle.get_speed(self.agent.vehicle)
-        # print("current_speed" + str(current_speed))
+        #print("current_speed" + str(current_speed))
 
         if is_brake == False:
             k_p, k_d, k_i = FlowPIDController.find_k_values(vehicle=self.agent.vehicle, config=self.config)
