@@ -57,6 +57,7 @@ class iOSBridge(Bridge):
         velocity = source.get("velocity", None)
         control = source.get("control", None)
         acceleration = source.get("acceleration", None)
+        recv_time = source.get("recv_time", None)
         vehicle = Vehicle()
         if transform is not None:
             vehicle.transform = self.convert_transform_from_source_to_agent(transform)
@@ -70,6 +71,7 @@ class iOSBridge(Bridge):
             vehicle.control = self.convert_control_from_source_to_agent(control)
         if acceleration is not None:
             vehicle.acceleration = acceleration
+        vehicle.recv_time = recv_time
         return vehicle
 
     def convert_control_from_agent_to_source(self, control: VehicleControl) -> VehicleControl:

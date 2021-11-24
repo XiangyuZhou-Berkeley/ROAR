@@ -85,6 +85,7 @@ class FlowAgent(Agent):
         ax = self.vehicle.acceleration.x
         ay = self.vehicle.acceleration.y
         az = self.vehicle.acceleration.z
+        recv_time = self.vehicle.recv_time
         v_current = self.vehicle.get_speed(self.vehicle) / 3.6
         v_ref = self.target_speed / 3.6
         throttle = self.vehicle_control.get_throttle()
@@ -92,7 +93,7 @@ class FlowAgent(Agent):
         kp = controller.kp * 3.6
         ki = controller.ki * 3.6
         kd = controller.kd * 3.6
-        self.current_data_list.append([t, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle, kp, ki, kd])
+        self.current_data_list.append([recv_time, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle, kp, ki, kd])
 
     def write_current_data(self):
         vehicle_state_file = (self.data_file_path).open(mode='a+')
