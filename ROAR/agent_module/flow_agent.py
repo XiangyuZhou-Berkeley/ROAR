@@ -35,6 +35,7 @@ class FlowAgent(Agent):
         self.done = False
         self.t_b = time.time()
         self.can_brake = False
+        self.prev_time = 0
 
 
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
@@ -93,7 +94,9 @@ class FlowAgent(Agent):
         kp = controller.kp * 3.6
         ki = controller.ki * 3.6
         kd = controller.kd * 3.6
-        self.current_data_list.append([recv_time, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle, kp, ki, kd])
+        if recv_time != self.prev_time:
+            self.prev_time = recv_time
+            self.current_data_list.append([recv_time, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle, kp, ki, kd])
 
     def write_current_data(self):
         vehicle_state_file = (self.data_file_path).open(mode='a+')
