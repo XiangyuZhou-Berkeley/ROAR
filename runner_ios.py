@@ -75,7 +75,7 @@ def showIPUntilAck():
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
     try:
-        s.bind((get_ip(), 8008))
+        s.bind((get_ip(), 8890))
         s.settimeout(1)
         while True:
             try:
@@ -144,7 +144,7 @@ if __name__ == '__main__':
 
         success = False
         if args.reconnect:
-            success, addr = showIPUntilAckUDP()
+            success, addr = showIPUntilAck()
             if success:
                 ios_config.ios_ip_addr = addr
                 json.dump(ios_config.dict(), ios_config_file_path.open('w'), indent=4)
