@@ -22,7 +22,7 @@ class FlowAgent(Agent):
         self.brake_pid_config = kwargs.get("brake_config", "")
         self.pid_controller = FlowPIDController(agent=self, steering_boundary=(-1, 1), throttle_boundary=(-0.5, 1))
         self._dt = 0.03
-        self.target_speed = 18 # in km/h
+        self.target_speed = 10.8 # in km/h
         # self.kwargs.__setitem__("target_speed", self.target_speed)
         self.break_state = False
         self.vehicle = vehicle
@@ -94,6 +94,7 @@ class FlowAgent(Agent):
         kp = controller.kp * 3.6
         ki = controller.ki * 3.6
         kd = controller.kd * 3.6
+
         if recv_time != self.prev_time:
             self.prev_time = recv_time
             self.current_data_list.append([recv_time, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle, kp, ki, kd])
