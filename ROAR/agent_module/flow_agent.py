@@ -21,7 +21,8 @@ class FlowAgent(Agent):
         self._error_buffer = deque(maxlen=10)
         self.brake_pid_config = kwargs.get("brake_config", "")
         self.pid_controller = FlowPIDController(agent=self, steering_boundary=(-1, 1), throttle_boundary=(-0.5, 1))
-        self._dt = 0.03
+        #TODO: real dt
+        self._dt = 0.05
         self.target_speed = 10.8 # in km/h
         # self.kwargs.__setitem__("target_speed", self.target_speed)
         self.break_state = False
@@ -71,7 +72,7 @@ class FlowAgent(Agent):
         except:
             os.mkdir(directory)
         vehicle_state_file = (self.data_file_path).open('w')
-        vehicle_state_file.write("t,vx,vy,vz,ax,ay,az,x,y,z,v_current,v_ref,throttle,kp,ki,kd\n")
+        vehicle_state_file.write("t,vx,vy,vz,ax,ay,az,x,y,z,v_current,v_ref,throttle_computer,throttle_vehicle,kp,ki,kd\n")
         vehicle_state_file.close()
 
     def get_current_data(self):
@@ -89,7 +90,9 @@ class FlowAgent(Agent):
         recv_time = self.vehicle.recv_time
         v_current = self.vehicle.get_speed(self.vehicle) / 3.6
         v_ref = self.target_speed / 3.6
-        throttle = self.vehicle_control.get_throttle()
+        throttle_computer = self.vehicle_control.get_throttle()
+        throttle_vehicle = self.vehicle.throttle
+
         controller = self.pid_controller.long_pid_controller
         kp = controller.kp * 3.6
         ki = controller.ki * 3.6
@@ -97,11 +100,11 @@ class FlowAgent(Agent):
 
         if recv_time != self.prev_time:
             self.prev_time = recv_time
-            self.current_data_list.append([recv_time, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle, kp, ki, kd])
+            self.current_data_list.append([recv_time, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle_computer,throttle_vehicle, kp, ki, kd])
 
     def write_current_data(self):
         vehicle_state_file = (self.data_file_path).open(mode='a+')
         for d in self.current_data_list:
             vehicle_state_file.write(f"{d[0]},{d[1]},{d[2]},{d[3]},{d[4]},{d[5]},{d[6]},{d[7]},{d[8]},{d[9]},{d[10]},{d[11]},"
-                                     f"{d[12]},{d[13]},{d[14]},{d[15]}\n")
+                                     f"{d[12]},{d[13]},{d[14]},{d[15]},{d[16]}\n")
         vehicle_state_file.close()

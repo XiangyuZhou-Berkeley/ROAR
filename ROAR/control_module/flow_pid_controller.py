@@ -53,17 +53,19 @@ class FlowPIDController(Controller):
 
 class LongPIDController(Controller):
     def __init__(self, agent, config: dict, throttle_boundary: Tuple[float, float], max_speed: float,
-                 dt: float = 0.03, **kwargs):
+                 dt: float = 0.05, **kwargs):
         super().__init__(agent, **kwargs)
         self.config = config
         self.max_speed = max_speed
         self.throttle_boundary = throttle_boundary
+        #TODO: change deque size (increase)
         self._error_buffer = deque(maxlen=10)
         self.kp = 0
         self.ki = 0
         self.kd = 0
-
+        self.de = 0
         self._dt = dt
+        #TODO: add time buffer, mapping to error
 
     def run_in_series(self,is_brake, config_b, **kwargs) -> float:
         target_speed = min(self.max_speed, kwargs.get("target_speed", self.max_speed))
@@ -88,15 +90,17 @@ class LongPIDController(Controller):
 
         if len(self._error_buffer) >= 2:
             # print(self._error_buffer[-1], self._error_buffer[-2])
+            # TODO:choose data with larger interval, also add error and _de to the table; repeat the experiment
             _de = (self._error_buffer[-2] - self._error_buffer[-1]) / self._dt
             _ie = sum(self._error_buffer) * self._dt
+            if _de != 0 and abs(_de * k_d) < 0.3 :
+                self.de = _de
         else:
             _de = 0.0
             _ie = 0.0
-        print("d" + str(_de))
-        output = float(np.clip((k_p * error) + (k_d * _de) + (k_i * _ie), self.throttle_boundary[0],
+        output = float(np.clip((k_p * error) + (k_d * self.de) + (k_i * _ie), self.throttle_boundary[0],
                                self.throttle_boundary[1]))
-        print("throttle" +str(output))
+        print(str(k_d * self.de))
         # self.logger.debug(f"curr_speed: {round(current_speed, 2)} | kp: {round(k_p, 2)} | kd: {k_d} | ki = {k_i} | "
         #       f"err = {round(error, 2)} | de = {round(_de, 2)} | ie = {round(_ie, 2)}")
         # f"self._error_buffer[-1] {self._error_buffer[-1]} | self._error_buffer[-2] = {self._error_buffer[-2]}")
