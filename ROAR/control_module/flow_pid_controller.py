@@ -59,18 +59,21 @@ class LongPIDController(Controller):
         self.max_speed = max_speed
         self.throttle_boundary = throttle_boundary
         #TODO: change deque size (increase)
-        self._error_buffer = deque(maxlen=10)
+        self._buffer_size = 50
+        self._error_buffer = deque(maxlen=self._buffer_size)
+        # add time buffer, mapping to error
+        self._time_buffer = deque(maxlen=self._buffer_size)
         self.kp = 0
         self.ki = 0
         self.kd = 0
         self.de = 0
         self._dt = dt
-        #TODO: add time buffer, mapping to error
-
+        # we need to use error[-1] - error[-_nframe] / dt to get _de
+        self._nframe = 5
+        assert (self._nframe < self._buffer_size)
     def run_in_series(self,is_brake, config_b, **kwargs) -> float:
         target_speed = min(self.max_speed, kwargs.get("target_speed", self.max_speed))
         current_speed = Vehicle.get_speed(self.agent.vehicle)
-        #print("current_speed" + str(current_speed))
 
         if is_brake == False:
             k_p, k_d, k_i = FlowPIDController.find_k_values(vehicle=self.agent.vehicle, config=self.config)
@@ -87,13 +90,17 @@ class LongPIDController(Controller):
         # print("kp kd ki = " + str(k_p) + " " + str(k_d))
 
         self._error_buffer.append(error)
+        self._time_buffer.append(self._dt)
 
-        if len(self._error_buffer) >= 2:
+        if len(self._error_buffer) >= self._nframe:
             # print(self._error_buffer[-1], self._error_buffer[-2])
-            # TODO:choose data with larger interval, also add error and _de to the table; repeat the experiment
-            _de = (self._error_buffer[-2] - self._error_buffer[-1]) / self._dt
+            # TODO:also add error and _de to the table; repeat the experiment
+            _dt_sum = 0
+            for i in range(1,self._nframe + 1):
+                _dt_sum += self._time_buffer[-i]
+            _de = (self._error_buffer[-self._nframe] - self._error_buffer[-1]) / _dt_sum
             _ie = sum(self._error_buffer) * self._dt
-            if _de != 0 and abs(_de * k_d) < 0.3 :
+            if _de != 0 and abs(_de * k_d) < 0.3:
                 self.de = _de
         else:
             _de = 0.0
