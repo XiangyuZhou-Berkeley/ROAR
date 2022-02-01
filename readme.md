@@ -23,3 +23,19 @@ Currently finished:
 2. building an acclerating and braking for pid, see [ROAR](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test)/[ROAR](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test/ROAR)/[configurations](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test/ROAR/configurations)/[carla](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test/ROAR/configurations/carla)/**brake_pid.json**  
 
    and [ROAR](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test)/[ROAR](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test/ROAR)/[configurations](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test/ROAR/configurations)/[carla](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test/ROAR/configurations/carla)/**carla_pid_config.json** 
+
+
+
+#### TODO
+
+1. ` ROAR/agent_module/flow_agent.py`
+
+   (1) TODO: real dt
+
+2. `ROAR/control_module/flow_pid_controller.py`
+
+   \(2) TODO: change deque size (increase)
+
+   \(3) TODO: add time buffer, mapping to error
+
+   (4) TODO:choose data with larger interval, also add error and _de to the table; repeat the experiment
