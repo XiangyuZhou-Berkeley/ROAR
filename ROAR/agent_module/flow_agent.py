@@ -97,7 +97,7 @@ class FlowAgent(Agent):
         kp = controller.kp * 3.6
         ki = controller.ki * 3.6
         kd = controller.kd * 3.6
-
+        #TODO: add, _de, dt,previous_time
         if recv_time != self.prev_time:
             self.prev_time = recv_time
             self.current_data_list.append([recv_time, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle_computer,throttle_vehicle, kp, ki, kd])
