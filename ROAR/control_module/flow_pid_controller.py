@@ -1,3 +1,4 @@
+from matplotlib.pyplot import get
 from pydantic import BaseModel, Field
 from ROAR.control_module.controller import Controller
 from ROAR.utilities_module.vehicle_models import VehicleControl, Vehicle
@@ -35,7 +36,7 @@ class FlowPIDController(Controller):
     def run_in_series(self, is_brake, config_b, **kwargs) -> VehicleControl:
         config_b = json.load(Path(config_b).open(mode='r'))
         config_b = config_b["longitudinal_controller"]
-        throttle = self.long_pid_controller.run_in_series(is_brake, config_b,target_speed=kwargs.get("target_speed", self.max_speed))
+        throttle = self.long_pid_controller.run_in_series(is_brake, config_b, target_speed=kwargs.get("target_speed", self.max_speed), dt=kwargs.get("dt"))
         #steering = self.lat_pid_controller.run_in_series()
         return VehicleControl(throttle=throttle, steering=0)
 
@@ -73,6 +74,8 @@ class LongPIDController(Controller):
         assert (self._nframe < self._buffer_size)
     def run_in_series(self,is_brake, config_b, **kwargs) -> float:
         target_speed = min(self.max_speed, kwargs.get("target_speed", self.max_speed))
+        self._dt = kwargs.get("dt", self._dt)
+        
         current_speed = Vehicle.get_speed(self.agent.vehicle)
 
         if is_brake == False:
