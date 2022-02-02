@@ -64,6 +64,8 @@ class FlowAgent(Agent):
         self._dt = recv_time - self.prev_time
         if self._dt == 0:
             self._dt = 0.0001
+        if self.prev_time == 0:
+            self._dt = 0.000
         print(self._dt)
         # print("recv_time:" + str(recv_time) + "prev_time" + str(self.prev_time))
         self.vehicle_control = self.pid_controller.run_in_series(is_brake=is_brake, config_b=self.brake_pid_config,
