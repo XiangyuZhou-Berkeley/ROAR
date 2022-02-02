@@ -94,6 +94,7 @@ class LongPIDController(Controller):
         # print("kp kd ki = " + str(k_p) + " " + str(k_d))
 
         self._error_buffer.append(error)
+        print(self._dt)
         self._time_buffer.append(self._dt)
 
         if len(self._error_buffer) >= self._nframe:
