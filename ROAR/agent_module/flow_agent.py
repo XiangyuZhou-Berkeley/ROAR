@@ -23,7 +23,7 @@ class FlowAgent(Agent):
         self.pid_controller = FlowPIDController(agent=self, steering_boundary=(-1, 1), throttle_boundary=(-0.5, 1))
 
 
-        #TODO: real dt
+        #real dt
         # Solved: update dt in get_current_data()
         self._dt = 0.05
         self.target_speed = 10.8 # in km/h
@@ -61,8 +61,11 @@ class FlowAgent(Agent):
                 self.target_speed = 0
         
         recv_time = self.vehicle.recv_time
-
         self._dt = recv_time - self.prev_time
+        if self._dt == 0:
+            self._dt = 0.0001
+        print(self._dt)
+        # print("recv_time:" + str(recv_time) + "prev_time" + str(self.prev_time))
         self.vehicle_control = self.pid_controller.run_in_series(is_brake=is_brake, config_b=self.brake_pid_config,
                                                                  target_speed=self.target_speed, dt = self._dt)
         self.get_current_data()
@@ -78,7 +81,7 @@ class FlowAgent(Agent):
         except:
             os.mkdir(directory)
         vehicle_state_file = (self.data_file_path).open('w')
-        vehicle_state_file.write("t,prev_t,dt,de,vx,vy,vz,ax,ay,az,x,y,z,v_current,v_ref,throttle_computer,throttle_vehicle,kp,ki,kd\n")
+        vehicle_state_file.write("t,prev_t,dt,_dt_sum,de,vx,vy,vz,ax,ay,az,x,y,z,v_current,v_ref,throttle_computer,throttle_vehicle,kp,ki,kd\n")
         vehicle_state_file.close()
 
     def get_current_data(self):
@@ -100,18 +103,18 @@ class FlowAgent(Agent):
         throttle_vehicle = self.vehicle.throttle
         controller = self.pid_controller.long_pid_controller
         de = controller.de
+        dt_sum = controller.dt_sum
         kp = controller.kp * 3.6
         ki = controller.ki * 3.6
         kd = controller.kd * 3.6
         #TODO: add, _de, dt,previous_time
         # SOLVED: add prev_t, dt
         if recv_time != self.prev_time:
-            self._dt =  recv_time - self.prev_time
-            self.current_data_list.append([recv_time, self.prev_time, self._dt,de,vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle_computer,throttle_vehicle, kp, ki, kd])
+            self.current_data_list.append([recv_time, self.prev_time, self._dt, dt_sum,de,vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle_computer,throttle_vehicle, kp, ki, kd])
             self.prev_time = recv_time
     def write_current_data(self):
         vehicle_state_file = (self.data_file_path).open(mode='a+')
         for d in self.current_data_list:
             vehicle_state_file.write(f"{d[0]},{d[1]},{d[2]},{d[3]},{d[4]},{d[5]},{d[6]},{d[7]},{d[8]},{d[9]},{d[10]},{d[11]},"
-                                     f"{d[12]},{d[13]},{d[14]},{d[15]},{d[16]},{d[17]},{d[18]}, {d[19]}\n")
+                                     f"{d[12]},{d[13]},{d[14]},{d[15]},{d[16]},{d[17]},{d[18]}, {d[19]},{d[20]}\n")
         vehicle_state_file.close()

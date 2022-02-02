@@ -71,6 +71,7 @@ class LongPIDController(Controller):
         self._dt = dt
         # we need to use error[-1] - error[-_nframe] / dt to get _de
         self._nframe = 5
+        self.dt_sum = 0
         assert (self._nframe < self._buffer_size)
     def run_in_series(self,is_brake, config_b, **kwargs) -> float:
         target_speed = min(self.max_speed, kwargs.get("target_speed", self.max_speed))
@@ -98,10 +99,11 @@ class LongPIDController(Controller):
         if len(self._error_buffer) >= self._nframe:
             # print(self._error_buffer[-1], self._error_buffer[-2])
             # TODO:also add error and _de to the table; repeat the experiment
-            _dt_sum = 0
+            dt_sum = 0
             for i in range(1,self._nframe + 1):
-                _dt_sum += self._time_buffer[-i]
-            _de = (self._error_buffer[-self._nframe] - self._error_buffer[-1]) / _dt_sum
+                dt_sum += self._time_buffer[-i]
+            self.dt_sum = dt_sum
+            _de = (self._error_buffer[-self._nframe] - self._error_buffer[-1]) / dt_sum
             _ie = sum(self._error_buffer) * self._dt
             if _de != 0 and abs(_de * k_d) < 0.3:
                 self.de = _de
