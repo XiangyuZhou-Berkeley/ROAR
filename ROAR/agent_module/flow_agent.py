@@ -21,7 +21,10 @@ class FlowAgent(Agent):
         self._error_buffer = deque(maxlen=10)
         self.brake_pid_config = kwargs.get("brake_config", "")
         self.pid_controller = FlowPIDController(agent=self, steering_boundary=(-1, 1), throttle_boundary=(-0.5, 1))
+
+
         #TODO: real dt
+        # Solved: update dt in get_current_data()
         self._dt = 0.05
         self.target_speed = 10.8 # in km/h
         # self.kwargs.__setitem__("target_speed", self.target_speed)
@@ -72,7 +75,7 @@ class FlowAgent(Agent):
         except:
             os.mkdir(directory)
         vehicle_state_file = (self.data_file_path).open('w')
-        vehicle_state_file.write("t,vx,vy,vz,ax,ay,az,x,y,z,v_current,v_ref,throttle_computer,throttle_vehicle,kp,ki,kd\n")
+        vehicle_state_file.write("t,prev_t,dt,de,vx,vy,vz,ax,ay,az,x,y,z,v_current,v_ref,throttle_computer,throttle_vehicle,kp,ki,kd\n")
         vehicle_state_file.close()
 
     def get_current_data(self):
@@ -92,16 +95,17 @@ class FlowAgent(Agent):
         v_ref = self.target_speed / 3.6
         throttle_computer = self.vehicle_control.get_throttle()
         throttle_vehicle = self.vehicle.throttle
-
         controller = self.pid_controller.long_pid_controller
+        de = controller.de
         kp = controller.kp * 3.6
         ki = controller.ki * 3.6
         kd = controller.kd * 3.6
         #TODO: add, _de, dt,previous_time
+        # SOLVED: add prev_t, dt
         if recv_time != self.prev_time:
+            self._dt =  recv_time - self.prev_time
+            self.current_data_list.append([recv_time, self.prev_time, self._dt,de,vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle_computer,throttle_vehicle, kp, ki, kd])
             self.prev_time = recv_time
-            self.current_data_list.append([recv_time, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle_computer,throttle_vehicle, kp, ki, kd])
-
     def write_current_data(self):
         vehicle_state_file = (self.data_file_path).open(mode='a+')
         for d in self.current_data_list:
