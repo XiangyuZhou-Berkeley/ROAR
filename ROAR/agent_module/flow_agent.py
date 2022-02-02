@@ -40,7 +40,7 @@ class FlowAgent(Agent):
         self.t_b = time.time()
         self.can_brake = False
         self.prev_time = 0
-
+        self.recv_time = 0
 
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
         super(FlowAgent,self).run_step(sensors_data=sensors_data, vehicle=vehicle)
@@ -59,16 +59,18 @@ class FlowAgent(Agent):
             if (t_c - self.t_b >= 3):
                 is_brake = True
                 self.target_speed = 0
-        
-        recv_time = self.vehicle.recv_time
-        self._dt = recv_time - self.prev_time
-        if self._dt == 0:
-            self._dt = 0.0001
-        print(self._dt)
-        # print("recv_time:" + str(recv_time) + "prev_time" + str(self.prev_time))
-        self.vehicle_control = self.pid_controller.run_in_series(is_brake=is_brake, config_b=self.brake_pid_config,
+        self.recv_time = self.vehicle.recv_time
+        if (self.recv_time != self.prev_time):
+            self._dt = self.recv_time - self.prev_time
+        # if self._dt == 0:
+        #     self._dt = 0.0001
+            if (self.prev_time == 0):
+                self._dt = 0
+            self.vehicle_control = self.pid_controller.run_in_series(is_brake=is_brake, config_b=self.brake_pid_config,
                                                                  target_speed=self.target_speed, dt = self._dt)
-        self.get_current_data()
+            self.get_current_data()
+            self.prev_time = self.recv_time
+
         return self.vehicle_control
 
     def write_meta_data(self):
@@ -85,7 +87,6 @@ class FlowAgent(Agent):
         vehicle_state_file.close()
 
     def get_current_data(self):
-        # t = datetime.now().time()
         t = time.time()
         vx = self.vehicle.velocity.x
         vy = self.vehicle.velocity.y
@@ -96,7 +97,6 @@ class FlowAgent(Agent):
         ax = self.vehicle.acceleration.x
         ay = self.vehicle.acceleration.y
         az = self.vehicle.acceleration.z
-        recv_time = self.vehicle.recv_time
         v_current = self.vehicle.get_speed(self.vehicle) / 3.6
         v_ref = self.target_speed / 3.6
         throttle_computer = self.vehicle_control.get_throttle()
@@ -107,11 +107,9 @@ class FlowAgent(Agent):
         kp = controller.kp * 3.6
         ki = controller.ki * 3.6
         kd = controller.kd * 3.6
-        #TODO: add, _de, dt,previous_time
-        # SOLVED: add prev_t, dt
-        if recv_time != self.prev_time:
-            self.current_data_list.append([recv_time, self.prev_time, self._dt, dt_sum,de,vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle_computer,throttle_vehicle, kp, ki, kd])
-            self.prev_time = recv_time
+        # Tadd, _de, dt,previous_time
+        self.current_data_list.append([self.recv_time, self.prev_time, self._dt, dt_sum,de,vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref, throttle_computer,throttle_vehicle, kp, ki, kd])
+
     def write_current_data(self):
         vehicle_state_file = (self.data_file_path).open(mode='a+')
         for d in self.current_data_list:
