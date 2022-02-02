@@ -107,7 +107,7 @@ class LongPIDController(Controller):
             _ie = 0.0
         output = float(np.clip((k_p * error) + (k_d * self.de) + (k_i * _ie), self.throttle_boundary[0],
                                self.throttle_boundary[1]))
-        print(str(k_d * self.de))
+        # print(str(k_d * self.de))
         # self.logger.debug(f"curr_speed: {round(current_speed, 2)} | kp: {round(k_p, 2)} | kd: {k_d} | ki = {k_i} | "
         #       f"err = {round(error, 2)} | de = {round(_de, 2)} | ie = {round(_ie, 2)}")
         # f"self._error_buffer[-1] {self._error_buffer[-1]} | self._error_buffer[-2] = {self._error_buffer[-2]}")

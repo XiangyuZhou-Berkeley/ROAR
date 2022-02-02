@@ -1,5 +1,5 @@
 {
-    "ios_ip_addr": "10.0.0.10",
+    "ios_ip_addr": "10.0.0.79",
     "ios_port": 8005,
     "world_cam_route_name": "world_cam",
     "face_cam_route_name": "face_cam",

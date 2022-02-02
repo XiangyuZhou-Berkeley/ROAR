@@ -48,9 +48,9 @@ class VehicleStateStreamer(UDPStreamer):
             self.velocity.y = np.average(self.vy_deque) #d[7]#np.average(self.vy_deque)
             self.velocity.z = np.average(self.vz_deque) #d[8]#np.average(self.vz_deque)
 
-            # print("x" + str(self.velocity.x))
-            # print("y" + str(self.velocity.y))
-            # print("z" + str(self.velocity.z))
+            print("x" + str(self.velocity.x))
+            print("y" + str(self.velocity.y))
+            print("z" + str(self.velocity.z))
             self.acceleration.x = d[9]
             self.acceleration.y = d[10]
             self.acceleration.z = d[11]
