@@ -59,9 +59,12 @@ class FlowAgent(Agent):
             if (t_c - self.t_b >= 3):
                 is_brake = True
                 self.target_speed = 0
+        
+        recv_time = self.vehicle.recv_time
 
+        self._dt = recv_time - self.prev_time
         self.vehicle_control = self.pid_controller.run_in_series(is_brake=is_brake, config_b=self.brake_pid_config,
-                                                                 target_speed=self.target_speed)
+                                                                 target_speed=self.target_speed, dt = self._dt)
         self.get_current_data()
         return self.vehicle_control
 
