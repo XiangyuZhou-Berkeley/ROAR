@@ -9,7 +9,7 @@
     "ar_mode": false,
     "max_throttle": 0.7,
     "max_steering": 0.2,
-    "steering_offset": 0.135,
+    "steering_offset": 0.02,
     "invert_steering": false,
     "pygame_display_width": 1080,
     "pygame_display_height": 810,
