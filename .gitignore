@@ -124,7 +124,10 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
-
+data/output/front_depth
+data/output/front_rgb
+data/output/rear_rgb
+data/output/transform
 # Pyre type checker
 .pyre/
 
@@ -133,7 +136,6 @@ __pycache__
 LinuxNoEditor
 WindowsNoEditor
 
-data/output
 archive
 misc/*.jpg
 misc/*.png
