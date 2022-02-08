@@ -133,6 +133,8 @@ class iOSRunner:
 
                 control.throttle = np.clip(control.throttle, -self.ios_config.max_throttle,
                                            self.ios_config.max_throttle)
+                # bug where here it will add offset all the time
+                control.steering = 0
                 control.steering = np.clip(control.steering + self.ios_config.steering_offset,
                                            -self.ios_config.max_steering,
                                            self.ios_config.max_steering)

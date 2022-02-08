@@ -39,3 +39,18 @@ Currently finished:
    \(3) TODO: add time buffer, mapping to error
 
    (4) TODO:choose data with larger interval, also add error and _de to the table; repeat the experiment
+
+
+
+Feb 7:
+
+1.solved the steering bug in auto-pilot, now it can run in a straight line in --auto
+
+2.try different kp and kd when target is 3 m/s and 2 m/s, maybe need to add ki to make it more stable.
+
+3.the latency problem still has some effect, needs to talk about it.
+
+TODO:
+
+change the data output file name to : target, kp, ki, kd , time to make it more clear 
+

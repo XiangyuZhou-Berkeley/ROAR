@@ -26,7 +26,7 @@ class FlowAgent(Agent):
         #real dt
         # Solved: update dt in get_current_data()
         self._dt = 0.05
-        self.target_speed = 10.8 # 10.8 # in km/h
+        self.target_speed = 7.2 # 10.8 # in km/h
         # self.kwargs.__setitem__("target_speed", self.target_speed)
         self.break_state = False
         self.vehicle = vehicle

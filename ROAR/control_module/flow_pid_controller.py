@@ -106,8 +106,10 @@ class LongPIDController(Controller):
             self.dt_sum = dt_sum
             _de = (self._error_buffer[-self._nframe] - self._error_buffer[-1]) / dt_sum
             _ie = sum(self._error_buffer) * self._dt
-            if _de != 0 and abs(_de * k_d) < 0.3:
-                self.de = _de
+            # temporaraily remove de's constraint '
+            # if _de != 0 and abs(_de * k_d) < 0.3:
+            #     self.de = _de
+            self.de = _de
         else:
             _de = 0.0
             _ie = 0.0
