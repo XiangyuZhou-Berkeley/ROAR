@@ -128,6 +128,7 @@ data/output/front_depth
 data/output/front_rgb
 data/output/rear_rgb
 data/output/transform
+data/output/flow_data
 # Pyre type checker
 .pyre/
 
