@@ -151,7 +151,7 @@ if __name__ == '__main__':
                 time.sleep(2)
         if success or args.reconnect is False:
             brake_pid_config = "./ROAR/configurations/carla/brake_pid.json"
-            agent = FlowAgent(vehicle=Vehicle(), agent_settings=agent_config, should_init_default_cam=True, brake_config=brake_pid_config)
+            agent = FlowAgent(vehicle=Vehicle(), agent_settings=agent_config, should_init_default_cam=True, brake_config=brake_pid_config, ios_config=ios_config)
             # agent = ForwardOnlyAgent(vehicle=Vehicle(), agent_settings=agent_config, should_init_default_cam=True)
             if args.use_unity:
                 runner = iOSUnityRunner(agent=agent, ios_config=ios_config)

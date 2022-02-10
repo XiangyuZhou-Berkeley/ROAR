@@ -36,9 +36,11 @@ class FlowPIDController(Controller):
     def run_in_series(self, is_brake, config_b, **kwargs) -> VehicleControl:
         config_b = json.load(Path(config_b).open(mode='r'))
         config_b = config_b["longitudinal_controller"]
-        throttle = self.long_pid_controller.run_in_series(is_brake, config_b, target_speed=kwargs.get("target_speed", self.max_speed), dt=kwargs.get("dt"))
+        throttle = self.long_pid_controller.run_in_series(is_brake, config_b,
+                                                          target_speed=kwargs.get("target_speed", self.max_speed),
+                                                          dt=kwargs.get("dt"))
         #steering = self.lat_pid_controller.run_in_series()
-        return VehicleControl(throttle=throttle, steering=0)
+        return VehicleControl(throttle=throttle, steering=kwargs.get("steering_offset"))
 
     @staticmethod
     def find_k_values(vehicle: Vehicle, config: dict) -> np.array:
@@ -70,10 +72,11 @@ class LongPIDController(Controller):
         self.de = 0
         self._dt = dt
         # we need to use error[-1] - error[-_nframe] / dt to get _de
-        self._nframe = 5
+        self._nframe = 2
         self.dt_sum = 0
+        self.ie = 0
         assert (self._nframe < self._buffer_size)
-    def run_in_series(self,is_brake, config_b, **kwargs) -> float:
+    def run_in_series(self, is_brake, config_b, **kwargs) -> float:
         target_speed = min(self.max_speed, kwargs.get("target_speed", self.max_speed))
         self._dt = kwargs.get("dt", self._dt)
         
@@ -93,19 +96,15 @@ class LongPIDController(Controller):
         # print("Target speed: " + str(target_speed))
         # print("kp kd ki = " + str(k_p) + " " + str(k_d))
 
-        self._error_buffer.append(error)
-        print(self._dt)
-        self._time_buffer.append(self._dt)
-
         if len(self._error_buffer) >= self._nframe:
             # print(self._error_buffer[-1], self._error_buffer[-2])
             # TODO:also add error and _de to the table; repeat the experiment
-            dt_sum = 0
-            for i in range(1,self._nframe + 1):
+            dt_sum = self._dt
+            for i in range(1,self._nframe):
                 dt_sum += self._time_buffer[-i]
             self.dt_sum = dt_sum
-            _de = (self._error_buffer[-self._nframe] - self._error_buffer[-1]) / dt_sum
-            _ie = sum(self._error_buffer) * self._dt
+            _de = (error - self._error_buffer[-(self._nframe-1)]) / dt_sum
+            self.ie += error * self._dt
             # temporaraily remove de's constraint '
             # if _de != 0 and abs(_de * k_d) < 0.3:
             #     self.de = _de
@@ -113,8 +112,11 @@ class LongPIDController(Controller):
         else:
             _de = 0.0
             _ie = 0.0
-        output = float(np.clip((k_p * error) + (k_d * self.de) + (k_i * _ie), self.throttle_boundary[0],
+        output = float(np.clip((k_p * error) + (k_d * self.de) + (k_i * self.ie), self.throttle_boundary[0],
                                self.throttle_boundary[1]))
+
+        self._error_buffer.append(error)
+        self._time_buffer.append(self._dt)
         # print(str(k_d * self.de))
         # self.logger.debug(f"curr_speed: {round(current_speed, 2)} | kp: {round(k_p, 2)} | kd: {k_d} | ki = {k_i} | "
         #       f"err = {round(error, 2)} | de = {round(_de, 2)} | ie = {round(_ie, 2)}")

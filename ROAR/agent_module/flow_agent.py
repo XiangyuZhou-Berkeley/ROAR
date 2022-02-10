@@ -21,6 +21,7 @@ class FlowAgent(Agent):
         self._error_buffer = deque(maxlen=10)
         self.brake_pid_config = kwargs.get("brake_config", "")
         self.pid_controller = FlowPIDController(agent=self, steering_boundary=(-1, 1), throttle_boundary=(-0.5, 1))
+        self.ios_config = kwargs.get("ios_config")
 
 
         #real dt
@@ -44,11 +45,7 @@ class FlowAgent(Agent):
 
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
         super(FlowAgent,self).run_step(sensors_data=sensors_data, vehicle=vehicle)
-        self.time_counter += 1
         is_brake = False
-        if (self.time_counter % 20 == 0):
-            self.write_current_data()
-            self.current_data_list = []
         if self.vehicle.get_speed(self.vehicle) >= self.target_speed and not self.done:
             self.logger.info("Start braking")
             self.can_brake = True
@@ -61,13 +58,18 @@ class FlowAgent(Agent):
                 self.target_speed = 0
         self.recv_time = self.vehicle.recv_time
         if (self.recv_time != self.prev_time):
+            self.time_counter += 1
+            if (self.time_counter % 20 == 0):
+                self.write_current_data()
+                self.current_data_list.clear()
             self._dt = self.recv_time - self.prev_time
         # if self._dt == 0:
         #     self._dt = 0.0001
-            if (self.prev_time == 0):
-                self._dt = 0
+        #     if (self.prev_time == 0):
+        #         self._dt = 0
             self.vehicle_control = self.pid_controller.run_in_series(is_brake=is_brake, config_b=self.brake_pid_config,
-                                                                 target_speed=self.target_speed, dt = self._dt)
+                                                                    target_speed=self.target_speed, dt = self._dt,
+                                                                     steering_offset = self.ios_config.steering_offset)
             self.get_current_data()
             self.prev_time = self.recv_time
 
