@@ -11,6 +11,10 @@ import logging
 from datetime import datetime
 import time
 import os
+import json
+from pathlib import Path
+
+v_ref = 7.2  # 10.8 # in km/h
 
 class FlowAgent(Agent):
     def __init__(self, vehicle: Vehicle, agent_settings: AgentConfig, **kwargs):
@@ -22,11 +26,10 @@ class FlowAgent(Agent):
         self.brake_pid_config = kwargs.get("brake_config", "")
         self.pid_controller = FlowPIDController(agent=self, steering_boundary=(-1, 1), throttle_boundary=(-0.5, 1))
 
-
         #real dt
         # Solved: update dt in get_current_data()
         self._dt = 0.05
-        self.target_speed = 3.6 # 10.8 # in km/h
+        self.target_speed = v_ref
         # self.kwargs.__setitem__("target_speed", self.target_speed)
         self.break_state = False
         self.vehicle = vehicle
@@ -72,10 +75,17 @@ class FlowAgent(Agent):
             self.prev_time = self.recv_time
 
         return self.vehicle_control
+
+
     def write_meta_data(self):
+        config_path = "./ROAR/configurations/carla/carla_pid_config.json"
+        config_b = json.load(Path(config_path).open(mode='r'))
+        config_b = config_b["longitudinal_controller"]["25"]
+        kp, kd, ki = config_b["Kp"], config_b["Kd"], config_b["Ki"]
         # vehicle_state_file = (self.vehicle_state_output_folder_path / "flow_data2.csv").open(mode='w')
         # self.data_file_path = self.vehicle_state_output_folder_path / "flow_data" / f"{datetime.now().strftime('%m-%d-%H:%M:%S')}.csv"
-        self.data_file_path = self.output_folder_path / "flow_data" / f"{datetime.now().strftime('%m-%d-%H:%M:%S')}.csv"
+        # self.data_file_path = self.output_folder_path / "flow_data" / f"{datetime.now().strftime('%m-%d-%H:%M:%S')}.csv"
+        self.data_file_path = self.output_folder_path / "flow_data" / f"vref{v_ref}_kp{kp}_ki{ki}_kd{kd}_{datetime.now().strftime('%m-%d-%H:%M:%S')}.csv"
         directory = os.path.dirname(self.data_file_path)
         try:
             os.stat(directory)

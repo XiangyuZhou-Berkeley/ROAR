@@ -124,10 +124,9 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
-data/output/front_depth
-data/output/front_rgb
-data/output/rear_rgb
-data/output/transform
+
+data/output
+
 # Pyre type checker
 .pyre/
 

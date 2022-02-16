@@ -50,9 +50,10 @@ Feb 7:
 
 3.the latency problem still has some effect, needs to talk about it.
 
-TODO:
-
+Feb 9:
 1.change the data output file name to : target, kp, ki, kd , time to make it more clear
+
+TODO:
 
 2.change the process from one target to multiple target process.
 
