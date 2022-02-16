@@ -58,3 +58,96 @@ TODO:
 
 3.change pid process();
 
+# get additional data
+
+
+
+To get additional data from iphone what should we change in the program:
+
+i will explain this with an example like recv_time ( to get time from iphone as data)
+
+## In ROAR IOS:
+
+### [ROAR](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test)/[ROAR_iOS](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test/ROAR_iOS)/**veh_state_streamer.py**
+
+1.
+
+https://github.com/XiangyuZhou-Berkeley/ROAR/blob/74302a0c230c51315aba7a98649224eb42a641ba/ROAR_iOS/veh_state_streamer.py#L27
+
+add a line intialzie the variable
+
+2.https://github.com/XiangyuZhou-Berkeley/ROAR/blob/74302a0c230c51315aba7a98649224eb42a641ba/ROAR_iOS/veh_state_streamer.py#L61
+
+in data package which one is recv_time
+
+### [ROAR](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test)/[ROAR_iOS](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test/ROAR_iOS)/**ios_runner.py**
+
+1.
+
+https://github.com/XiangyuZhou-Berkeley/ROAR/blob/74302a0c230c51315aba7a98649224eb42a641ba/ROAR_iOS/ios_runner.py#L192
+
+transmit this data from veh_state_streamer to Vehicle class
+
+use convert_vehicle_from_source_to_agent(self, source) -> Vehicle  in iOS_bridge
+
+### [ROAR](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test)/[Bridges](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test/Bridges)/**ios_bridge.py**
+
+1.
+
+https://github.com/XiangyuZhou-Berkeley/ROAR/blob/74302a0c230c51315aba7a98649224eb42a641ba/Bridges/ios_bridge.py#L60
+
+get data
+
+2. https://github.com/XiangyuZhou-Berkeley/ROAR/blob/74302a0c230c51315aba7a98649224eb42a641ba/Bridges/ios_bridge.py#L75
+
+   transmit into vehicle class
+
+### [ROAR](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test)/[ROAR](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test/ROAR)/[utilities_module](https://github.com/XiangyuZhou-Berkeley/ROAR/tree/test/ROAR/utilities_module)/**vehicle_models.py**
+
+1.
+
+https://github.com/XiangyuZhou-Berkeley/ROAR/blob/74302a0c230c51315aba7a98649224eb42a641ba/ROAR/utilities_module/vehicle_models.py#L52
+
+intialize recv_time in vehicle class
+
+
+
+
+
+## ROAR_XCODE
+
+### [ROAR-IOS](https://github.com/Jerry-Ge/ROAR-IOS)/[ROAR](https://github.com/Jerry-Ge/ROAR-IOS/tree/master/ROAR)/**ControlCenter.swift**
+
+1
+
+https://github.com/Jerry-Ge/ROAR-IOS/blob/109b74514dd19a04729b39016d9e88080d5d6106/ROAR/ControlCenter.swift#L88
+
+record the time and reduce length
+
+2.
+
+https://github.com/Jerry-Ge/ROAR-IOS/blob/109b74514dd19a04729b39016d9e88080d5d6106/ROAR/ControlCenter.swift#L118
+
+add time and to send back to iPhone
+
+
+
+
+
+### [ROAR-IOS](https://github.com/Jerry-Ge/ROAR-IOS)/[ROAR](https://github.com/Jerry-Ge/ROAR-IOS/tree/master/ROAR)/**utility.swift**
+
+https://github.com/Jerry-Ge/ROAR-IOS/blob/109b74514dd19a04729b39016d9e88080d5d6106/ROAR/utility.swift#L100
+
+
+
+https://github.com/Jerry-Ge/ROAR-IOS/blob/109b74514dd19a04729b39016d9e88080d5d6106/ROAR/utility.swift#L105
+
+
+
+
+
+https://github.com/Jerry-Ge/ROAR-IOS/blob/109b74514dd19a04729b39016d9e88080d5d6106/ROAR/utility.swift#L117
+
+
+
+https://github.com/Jerry-Ge/ROAR-IOS/blob/109b74514dd19a04729b39016d9e88080d5d6106/ROAR/utility.swift#L134
