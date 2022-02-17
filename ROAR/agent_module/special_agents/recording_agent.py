@@ -65,5 +65,5 @@ class RecordingAgent(Agent):
         #     points = self.kwargs[self.option]
         #     self.occupancy_map.update_async(points)
         #     self.occupancy_map.visualize(transform=self.vehicle.transform, view_size=(200, 200))
-        # return VehicleControl(throttle=0.2, steering=0)
+        return VehicleControl(throttle=0.2, steering=0)
 

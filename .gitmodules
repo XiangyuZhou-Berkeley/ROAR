@@ -9,4 +9,7 @@
 	url = https://github.com/augcog/ROAR_Gym.git
 [submodule "ROAR_iOS"]
 	path = ROAR_iOS
-	url = https://github.com/wuxiaohua1011/ROAR_iOS.git
+	url = https://github.com/wuxiaohua1011/ROAR-iOS
+[submodule "ROAR_Junior_Racing"]
+	path = ROAR_Junior_Racing
+	url = https://github.com/augcog/ROAR-Junior-Racing.git

@@ -16,7 +16,6 @@ from datetime import datetime
 
 def generate_csv_from_vehicle_state_dir(directory: Path, regex: str = "frame_*"):
     paths = sorted(glob((directory / regex).as_posix()), key=os.path.getmtime)
-
     log = OrderedDict()
 
     for p in paths:
@@ -37,4 +36,4 @@ def generate_csv_from_vehicle_state_dir(directory: Path, regex: str = "frame_*")
 
 
 if __name__ == '__main__':
-    generate_csv_from_vehicle_state_dir(Path("/Users/michaelwu/Desktop/projects/ROAR/data/output/vehicle_state"))
+    generate_csv_from_vehicle_state_dir(Path("../data/output/vehicle_state"))

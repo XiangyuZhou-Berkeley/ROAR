@@ -8,6 +8,7 @@ import cv2
 from collections import deque
 import numpy as np
 
+
 class ForwardOnlyAgent(Agent):
     def __init__(self, vehicle: Vehicle, agent_settings: AgentConfig, **kwargs):
         super().__init__(vehicle, agent_settings, **kwargs)
@@ -16,11 +17,8 @@ class ForwardOnlyAgent(Agent):
 
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
         super().run_step(sensors_data=sensors_data, vehicle=vehicle)
-        steering = 0
-        return VehicleControl(brake=True)
+        return VehicleControl(throttle=0.2, steering=0, brake=False)
         # if self.time_counter > 50:
         #     return VehicleControl(throttle=0, steering=steering, brake=True)
         # else:
         #     return VehicleControl(throttle=-0.5, steering=steering, brake=False)
-
-
