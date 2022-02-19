@@ -1,3 +1,4 @@
+from matplotlib.pyplot import get
 from pydantic import BaseModel, Field
 from ROAR.control_module.controller import Controller
 from ROAR.utilities_module.vehicle_models import VehicleControl, Vehicle
@@ -35,9 +36,12 @@ class FlowPIDController(Controller):
     def run_in_series(self, is_brake, config_b, **kwargs) -> VehicleControl:
         config_b = json.load(Path(config_b).open(mode='r'))
         config_b = config_b["longitudinal_controller"]
-        throttle = self.long_pid_controller.run_in_series(is_brake, config_b,target_speed=kwargs.get("target_speed", self.max_speed))
-        #steering = self.lat_pid_controller.run_in_series()
-        return VehicleControl(throttle=throttle, steering=0)
+        throttle = self.long_pid_controller.run_in_series(is_brake, config_b,
+                                                          target_speed=kwargs.get("target_speed", self.max_speed),
+                                                          dt=kwargs.get("dt"))
+        # steering = self.lat_pid_controller.run_in_series()
+        # return VehicleControl(throttle=throttle, steering=0)
+        return VehicleControl(throttle=0.08, steering=0)
 
     @staticmethod
     def find_k_values(vehicle: Vehicle, config: dict) -> np.array:
@@ -53,22 +57,31 @@ class FlowPIDController(Controller):
 
 class LongPIDController(Controller):
     def __init__(self, agent, config: dict, throttle_boundary: Tuple[float, float], max_speed: float,
-                 dt: float = 0.03, **kwargs):
+                 dt: float = 0.05, **kwargs):
         super().__init__(agent, **kwargs)
         self.config = config
         self.max_speed = max_speed
         self.throttle_boundary = throttle_boundary
-        self._error_buffer = deque(maxlen=10)
+        # TODO: change deque size (increase)
+        self._buffer_size = 50
+        self._error_buffer = deque(maxlen=self._buffer_size)
+        # add time buffer, mapping to error
+        self._time_buffer = deque(maxlen=self._buffer_size)
         self.kp = 0
         self.ki = 0
         self.kd = 0
-
+        self.de = 0
         self._dt = dt
+        # we need to use error[-1] - error[-_nframe] / dt to get _de
+        self._nframe = 5
+        self.dt_sum = 0
+        assert (self._nframe < self._buffer_size)
 
-    def run_in_series(self,is_brake, config_b, **kwargs) -> float:
+    def run_in_series(self, is_brake, config_b, **kwargs) -> float:
         target_speed = min(self.max_speed, kwargs.get("target_speed", self.max_speed))
+        self._dt = kwargs.get("dt", self._dt)
+
         current_speed = Vehicle.get_speed(self.agent.vehicle)
-        #print("current_speed" + str(current_speed))
 
         if is_brake == False:
             k_p, k_d, k_i = FlowPIDController.find_k_values(vehicle=self.agent.vehicle, config=self.config)
@@ -85,18 +98,28 @@ class LongPIDController(Controller):
         # print("kp kd ki = " + str(k_p) + " " + str(k_d))
 
         self._error_buffer.append(error)
+        print(self._dt)
+        self._time_buffer.append(self._dt)
 
-        if len(self._error_buffer) >= 2:
+        if len(self._error_buffer) >= self._nframe:
             # print(self._error_buffer[-1], self._error_buffer[-2])
-            _de = (self._error_buffer[-2] - self._error_buffer[-1]) / self._dt
+            # TODO:also add error and _de to the table; repeat the experiment
+            dt_sum = 0
+            for i in range(1, self._nframe + 1):
+                dt_sum += self._time_buffer[-i]
+            self.dt_sum = dt_sum
+            _de = (self._error_buffer[-self._nframe] - self._error_buffer[-1]) / dt_sum
             _ie = sum(self._error_buffer) * self._dt
+            # temporaraily remove de's constraint '
+            # if _de != 0 and abs(_de * k_d) < 0.3:
+            #     self.de = _de
+            self.de = _de
         else:
             _de = 0.0
             _ie = 0.0
-        # print("d" + str(_de))
-        output = float(np.clip((k_p * error) + (k_d * _de) + (k_i * _ie), self.throttle_boundary[0],
+        output = float(np.clip((k_p * error) + (k_d * self.de) + (k_i * _ie), self.throttle_boundary[0],
                                self.throttle_boundary[1]))
-        # print("throttle" +str(output))
+        # print(str(k_d * self.de))
         # self.logger.debug(f"curr_speed: {round(current_speed, 2)} | kp: {round(k_p, 2)} | kd: {k_d} | ki = {k_i} | "
         #       f"err = {round(error, 2)} | de = {round(_de, 2)} | ie = {round(_ie, 2)}")
         # f"self._error_buffer[-1] {self._error_buffer[-1]} | self._error_buffer[-2] = {self._error_buffer[-2]}")
@@ -133,7 +156,7 @@ class LatPIDController(Controller):
         # calculate error projection
         w_vec = np.array(
             [
-                0, #TODO: temp set the diff to 0. FLOW test do not need the steering
+                0,  # TODO: temp set the diff to 0. FLOW test do not need the steering
                 0,
                 0,
             ]
