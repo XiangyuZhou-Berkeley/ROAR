@@ -270,7 +270,8 @@ class iOSUnityRunner:
                     "transform": self.veh_state_streamer.transform,
                     "velocity": Vector3D(x=0, y=self.veh_state_streamer.hall_effect_sensor_velocity, z=0) if
                                 self.ios_config.use_hall_effect_for_spd else self.veh_state_streamer.velocity,
-                    "acceleration": self.veh_state_streamer.acceleration
+                    "acceleration": self.veh_state_streamer.acceleration,
+                    "recv_time": self.veh_state_streamer.recv_time
                 }
             )
             vehicle.control = self.control_streamer.control_tx

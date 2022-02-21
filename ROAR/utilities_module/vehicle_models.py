@@ -52,7 +52,7 @@ class Vehicle(BaseModel):
     transform: Optional[Transform] = Field(default=Transform())
     acceleration: Optional[Vector3D] = Field(default=Vector3D(x=0, y=0, z=0))
     control: VehicleControl = Field(default=VehicleControl())  # ?
-    recv_time: float = 0
+    recv_time: float = 0.0
     wheel_base: float = Field(
         default=2.875,
         title="Wheel Base length of the vehilce in meters",

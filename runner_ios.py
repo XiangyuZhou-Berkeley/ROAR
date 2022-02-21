@@ -7,6 +7,7 @@ from ROAR_Unity.unity_runner import iOSUnityRunner
 from ROAR.agent_module.forward_only_agent import ForwardOnlyAgent
 from ROAR.agent_module.special_agents.recording_agent import RecordingAgent
 from ROAR.utilities_module.vehicle_models import Vehicle
+from ROAR.agent_module.flow_agent import FlowAgent
 import logging
 import argparse
 from misc.utils import str2bool
@@ -123,6 +124,7 @@ if __name__ == '__main__':
         agent_config_file_path = Path("ROAR/configurations/iOS/iOS_agent_configuration.json")
         ios_config_file_path = Path("ROAR_iOS/configurations/ios_config.json")
         agent_config = AgentConfig.parse_file(agent_config_file_path)
+        brake_pid_config = "./ROAR/configurations/carla/brake_pid.json"
         ios_config: iOSConfig = iOSConfig.parse_file(ios_config_file_path)
         ios_config.ar_mode = True if args.mode == "ar" else False
         if args.use_glove:
@@ -144,7 +146,9 @@ if __name__ == '__main__':
                 json.dump(ios_config.dict(), ios_config_file_path.open('w'), indent=4)
                 time.sleep(2)
         if success or args.reconnect is False:
-            agent = ForwardOnlyAgent(vehicle=Vehicle(), agent_settings=agent_config, should_init_default_cam=True)
+            agent = FlowAgent(vehicle=Vehicle(), agent_settings=agent_config, should_init_default_cam=True,
+                              brake_config=brake_pid_config)
+            # agent = ForwardOnlyAgent(vehicle=Vehicle(), agent_settings=agent_config, should_init_default_cam=True)
             runner = iOSUnityRunner(agent=agent, ios_config=ios_config, is_unity=args.use_unity)
             runner.start_game_loop(auto_pilot=args.auto)
     except Exception as e:
