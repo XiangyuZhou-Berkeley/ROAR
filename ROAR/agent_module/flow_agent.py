@@ -93,7 +93,7 @@ class FlowAgent(Agent):
             os.mkdir(directory)
         vehicle_state_file = (self.data_file_path).open('w')
         vehicle_state_file.write(
-            "t,prev_t,dt,_dt_sum,de,vx,vy,vz,ax,ay,az,x,y,z,v_current,v_ref,throttle_computer,throttle_vehicle,kp,ki,kd\n")
+            "t,prev_t,dt,_dt_sum,de,vx,vy,vz,ax,ay,az,x,y,z,v_current,v_ref,throttle_computer,kp,ki,kd\n")
         vehicle_state_file.close()
 
     def get_current_data(self):
@@ -110,7 +110,7 @@ class FlowAgent(Agent):
         v_current = self.vehicle.get_speed(self.vehicle) / 3.6
         v_ref = self.target_speed / 3.6
         throttle_computer = self.vehicle_control.get_throttle()
-        throttle_vehicle = self.vehicle.throttle
+        # throttle_vehicle = self.vehicle.throttle
         controller = self.pid_controller.long_pid_controller
         de = controller.de
         dt_sum = controller.dt_sum
@@ -120,13 +120,13 @@ class FlowAgent(Agent):
         # Tadd, _de, dt,previous_time
         self.current_data_list.append(
             [self.recv_time, self.prev_time, self._dt, dt_sum, de, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref,
-             throttle_computer, throttle_vehicle, kp, ki, kd])
+             throttle_computer, kp, ki, kd])
 
     def write_current_data(self):
         vehicle_state_file = (self.data_file_path).open(mode='a+')
         for d in self.current_data_list:
             vehicle_state_file.write(
                 f"{d[0]},{d[1]},{d[2]},{d[3]},{d[4]},{d[5]},{d[6]},{d[7]},{d[8]},{d[9]},{d[10]},{d[11]},"
-                f"{d[12]},{d[13]},{d[14]},{d[15]},{d[16]},{d[17]},{d[18]}, {d[19]},{d[20]}\n")
+                f"{d[12]},{d[13]},{d[14]},{d[15]},{d[16]},{d[17]},{d[18]}, {d[19]}\n")
         vehicle_state_file.close()
 
