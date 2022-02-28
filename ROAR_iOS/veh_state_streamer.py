@@ -60,7 +60,6 @@ class VehicleStateStreamer(UDPStreamer):
             self.hall_effect_sensor_velocity = d[15]
 
             self.recv_time = d[16]
-            print(d[6])
         except Exception as e:
             self.logger.error(e)
 

@@ -40,8 +40,8 @@ class FlowPIDController(Controller):
                                                           target_speed=kwargs.get("target_speed", self.max_speed),
                                                           dt=kwargs.get("dt"))
         # steering = self.lat_pid_controller.run_in_series()
-        # return VehicleControl(throttle=throttle, steering=0)
-        return VehicleControl(throttle=0.08, steering=0)
+        return VehicleControl(throttle=throttle, steering=0)
+        # return VehicleControl(throttle=0.08, steering=0)
 
     @staticmethod
     def find_k_values(vehicle: Vehicle, config: dict) -> np.array:

@@ -201,6 +201,7 @@ class iOSUnityRunner:
                     control = self.braker.run_step(control=control, vehicle=vehicle)
                 control.throttle = np.clip(control.throttle, self.ios_config.max_reverse_throttle,
                                            self.ios_config.max_forward_throttle)
+                control.steering = 0
                 control.steering = np.clip(control.steering + self.ios_config.steering_offset,
                                            -self.ios_config.max_steering,
                                            self.ios_config.max_steering)
