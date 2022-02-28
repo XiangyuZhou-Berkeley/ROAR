@@ -33,8 +33,7 @@ class FlowPIDController(Controller):
         )
         self.logger = logging.getLogger(__name__)
 
-    def run_in_series(self, **kwargs) -> VehicleControl:
-        target_speed = kwargs.get("target_speed", self.max_speed)
+    def run_in_series(self, target_speed) -> VehicleControl:
         throttle = target_speed / 5.0
         # steering = self.lat_pid_controller.run_in_series()
         return VehicleControl(throttle=throttle, steering=0, kp=60, kd=30, ki=3)
