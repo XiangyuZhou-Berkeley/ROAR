@@ -77,6 +77,9 @@ class FlowAgent(Agent):
 
         return self.vehicle_control
 
+
+    def throttle_map(throttle):
+        return throttle * 5
     def write_meta_data(self):
         config_path = "./ROAR/configurations/carla/carla_pid_config.json"
         config_b = json.load(Path(config_path).open(mode='r'))

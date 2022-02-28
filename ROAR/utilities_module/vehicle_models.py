@@ -9,7 +9,9 @@ class VehicleControl(BaseModel):
     throttle: float = Field(default=0)
     steering: float = Field(default=0)
     brake: bool = Field(default=False)
-
+    kp: float = Field(default=0)
+    ki: float = Field(default=0)
+    kd: float = Field(default=0)
     @staticmethod
     def clamp(n, minn, maxn):
         return max(min(maxn, n), minn)

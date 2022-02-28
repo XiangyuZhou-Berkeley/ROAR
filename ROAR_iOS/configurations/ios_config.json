@@ -7,7 +7,7 @@
     "control_route_name": "control",
     "depth_cam_route_name": "world_cam_depth",
     "ar_mode": false,
-    "max_forward_throttle": 0.7,
+    "max_forward_throttle": 2.0,
     "max_reverse_throttle": -0.3,
     "max_steering": 1.0,
     "steering_offset": 0.1,
@@ -17,5 +17,5 @@
     "should_display_system_status": true,
     "should_use_glove": false,
     "glove_ip_addr": "192.168.1.30",
-    "use_hall_effect_for_spd": false
+    "use_hall_effect_for_spd": true
 }

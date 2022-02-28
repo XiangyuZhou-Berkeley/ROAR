@@ -20,7 +20,7 @@ class ControlStreamer(UDPStreamer):
 
     def send(self, control: VehicleControl):
         self.control_tx = control
-        string_format = f"{control.throttle},{control.steering}"
+        string_format = f"{control.throttle},{control.steering},{control.kp},{control.ki},{control.kd}"
         self._send_data(string_format)
 
 
