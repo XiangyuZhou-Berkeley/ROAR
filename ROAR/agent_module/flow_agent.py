@@ -14,7 +14,7 @@ import os
 import json
 from pathlib import Path
 
-v_ref = 7.2  # 10.8 # in km/h
+v_ref = 3  # 10.8 # in km/h
 
 
 class FlowAgent(Agent):
@@ -70,8 +70,7 @@ class FlowAgent(Agent):
             #     self._dt = 0.0001
             if (self.prev_time == 0):
                 self._dt = 0
-            self.vehicle_control = self.pid_controller.run_in_series(is_brake=is_brake, config_b=self.brake_pid_config,
-                                                                     target_speed=self.target_speed, dt=self._dt)
+            self.vehicle_control = self.pid_controller.run_in_series(target_speed=self.target_speed)
             self.get_current_data()
             self.prev_time = self.recv_time
 

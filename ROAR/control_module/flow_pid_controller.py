@@ -33,15 +33,12 @@ class FlowPIDController(Controller):
         )
         self.logger = logging.getLogger(__name__)
 
-    def run_in_series(self, is_brake, config_b, **kwargs) -> VehicleControl:
-        config_b = json.load(Path(config_b).open(mode='r'))
-        config_b = config_b["longitudinal_controller"]
-        throttle = self.long_pid_controller.run_in_series(is_brake, config_b,
-                                                          target_speed=kwargs.get("target_speed", self.max_speed),
-                                                          dt=kwargs.get("dt"))
+    def run_in_series(self, **kwargs) -> VehicleControl:
+        target_speed = kwargs.get("target_speed", self.max_speed)
+        throttle = target_speed / 5.0
         # steering = self.lat_pid_controller.run_in_series()
-        # return VehicleControl(throttle=throttle, steering=0)
-        return VehicleControl(throttle=0.4, steering=0)
+        return VehicleControl(throttle=throttle, steering=0, kp=60, kd=30, ki=3)
+        # return VehicleControl(throttle=0.08, steering=0)
 
     @staticmethod
     def find_k_values(vehicle: Vehicle, config: dict) -> np.array:
