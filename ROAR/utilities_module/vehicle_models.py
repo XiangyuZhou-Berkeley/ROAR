@@ -71,7 +71,7 @@ class Vehicle(BaseModel):
             :return: speed as a float in Km/h
         """
         vel = vehicle.velocity
-        return 3.6 * math.sqrt(vel.x ** 2 + vel.y ** 2 + vel.z ** 2)
+        return math.sqrt(vel.x ** 2 + vel.y ** 2 + vel.z ** 2)
 
     def to_array(self) -> np.ndarray:
         return np.concatenate([self.transform.to_array(), self.velocity.to_array(), self.acceleration.to_array(),

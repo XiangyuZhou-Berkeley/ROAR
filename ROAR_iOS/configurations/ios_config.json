@@ -10,7 +10,7 @@
     "max_forward_throttle": 2.0,
     "max_reverse_throttle": -0.3,
     "max_steering": 1.0,
-    "steering_offset": 0.1,
+    "steering_offset": 0.08,
     "invert_steering": false,
     "pygame_display_width": 1080,
     "pygame_display_height": 810,

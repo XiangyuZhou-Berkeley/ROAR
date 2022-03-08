@@ -36,7 +36,7 @@ class FlowPIDController(Controller):
     def run_in_series(self, target_speed) -> VehicleControl:
         throttle = target_speed / 5.0
         # steering = self.lat_pid_controller.run_in_series()
-        return VehicleControl(throttle=throttle, steering=0, kp=60, kd=30, ki=3)
+        return VehicleControl(throttle=throttle, steering=0, kp=40, kd=25, ki=3)
         # return VehicleControl(throttle=0.08, steering=0)
 
     @staticmethod

@@ -14,7 +14,7 @@ import os
 import json
 from pathlib import Path
 
-v_ref = 3  # 10.8 # in km/h
+v_ref = 1  # 10.8 # in km/h
 
 
 class FlowAgent(Agent):
@@ -60,9 +60,9 @@ class FlowAgent(Agent):
             self.done = True
         if self.can_brake:
             t_c = time.time()
-            if (t_c - self.t_b >= 3):
-                is_brake = True
-                self.target_speed = 0
+            # if (t_c - self.t_b >= 3):
+            #     is_brake = True
+            #     self.target_speed = 0
         self.recv_time = self.vehicle.recv_time
         if (self.recv_time != self.prev_time):
             self._dt = self.recv_time - self.prev_time
@@ -70,6 +70,7 @@ class FlowAgent(Agent):
             #     self._dt = 0.0001
             if (self.prev_time == 0):
                 self._dt = 0
+            self.target_speed = 1.5 * np.sin(self.recv_time * 2 * np.pi / 10) + 1.5
             self.vehicle_control = self.pid_controller.run_in_series(target_speed=self.target_speed)
             self.get_current_data()
             self.prev_time = self.recv_time
@@ -109,15 +110,15 @@ class FlowAgent(Agent):
         ax = self.vehicle.acceleration.x
         ay = self.vehicle.acceleration.y
         az = self.vehicle.acceleration.z
-        v_current = self.vehicle.get_speed(self.vehicle) / 3.6
-        v_ref = self.target_speed / 3.6
+        v_current = self.vehicle.get_speed(self.vehicle)
+        v_ref = self.target_speed
         throttle_computer = self.vehicle_control.get_throttle()
         controller = self.pid_controller.long_pid_controller
         de = controller.de
         dt_sum = controller.dt_sum
-        kp = controller.kp * 3.6
-        ki = controller.ki * 3.6
-        kd = controller.kd * 3.6
+        kp = 40
+        ki = 3
+        kd = 25
         # Tadd, _de, dt,previous_time
         self.current_data_list.append(
             [self.recv_time, self.prev_time, self._dt, dt_sum, de, vx, vy, vz, ax, ay, az, x, y, z, v_current, v_ref,
