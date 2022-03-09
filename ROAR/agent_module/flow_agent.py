@@ -45,6 +45,7 @@ class FlowAgent(Agent):
         self.can_brake = False
         self.prev_time = 0
         self.recv_time = 0
+        self.initial_time = 0
 
     def run_step(self, sensors_data: SensorsData, vehicle: Vehicle) -> VehicleControl:
         super(FlowAgent, self).run_step(sensors_data=sensors_data, vehicle=vehicle)
@@ -66,11 +67,13 @@ class FlowAgent(Agent):
         self.recv_time = self.vehicle.recv_time
         if (self.recv_time != self.prev_time):
             self._dt = self.recv_time - self.prev_time
+            if self.initial_time == 0:
+                self.initial_time = self.recv_time
             # if self._dt == 0:
             #     self._dt = 0.0001
             if (self.prev_time == 0):
                 self._dt = 0
-            self.target_speed = 1.5 * np.sin(self.recv_time * 2 * np.pi / 10) + 1.5
+            self.target_speed = np.maximum(np.sin((self.recv_time - self.initial_time) * 2 * np.pi / 10.0) + 1.0, 0.22)
             self.vehicle_control = self.pid_controller.run_in_series(target_speed=self.target_speed)
             self.get_current_data()
             self.prev_time = self.recv_time
