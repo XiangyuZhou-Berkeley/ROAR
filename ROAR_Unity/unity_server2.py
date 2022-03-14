@@ -103,8 +103,8 @@ class UnityVehicleStateServer(UnityServer):
     def save(self, **kwargs):
         pass
 
-    def update_state(self, x, y, z, roll, pitch, yaw, vx, vy, vz, ax, ay, az, gx, gy, gz, recv_time):
-        vals = [x, y, z, roll, pitch, yaw, vx, vy, vz, ax, ay, az, gx, gy, gz, recv_time]
+    def update_state(self, x, y, z, roll, pitch, yaw, vx, vy, vz, ax, ay, az, gx, gy, gz, recv_time, car_throttle):
+        vals = [x, y, z, roll, pitch, yaw, vx, vy, vz, ax, ay, az, gx, gy, gz, recv_time, car_throttle]
         data_to_send = ",".join([str(v) for v in vals])
         self.data_to_send = data_to_send.encode('utf-8')
 

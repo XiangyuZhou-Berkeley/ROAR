@@ -227,6 +227,7 @@ class iOSUnityRunner:
                         gy=self.veh_state_streamer.gyro.y,
                         gz=self.veh_state_streamer.gyro.z,
                         recv_time=self.veh_state_streamer.recv_time,
+                        car_throttle=self.veh_state_streamer.car_throttle,
                     )
         except Exception as e:
             self.logger.error(f"Something bad happend {e}")
@@ -272,7 +273,8 @@ class iOSUnityRunner:
                     "velocity": Vector3D(x=0, y=self.veh_state_streamer.hall_effect_sensor_velocity, z=0) if
                                 self.ios_config.use_hall_effect_for_spd else self.veh_state_streamer.velocity,
                     "acceleration": self.veh_state_streamer.acceleration,
-                    "recv_time": self.veh_state_streamer.recv_time
+                    "recv_time": self.veh_state_streamer.recv_time,
+                    "car_throttle": self.veh_state_streamer.car_throttle
                 }
             )
             vehicle.control = self.control_streamer.control_tx

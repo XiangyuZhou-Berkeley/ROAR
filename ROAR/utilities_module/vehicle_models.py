@@ -55,6 +55,7 @@ class Vehicle(BaseModel):
     acceleration: Optional[Vector3D] = Field(default=Vector3D(x=0, y=0, z=0))
     control: VehicleControl = Field(default=VehicleControl())  # ?
     recv_time: float = 0.0
+    car_throttle: float = 1500
     wheel_base: float = Field(
         default=2.875,
         title="Wheel Base length of the vehilce in meters",

@@ -27,6 +27,7 @@ class VehicleStateStreamer(UDPStreamer):
         self.hall_effect_sensor_velocity: float = 0
 
         self.recv_time: float = 0
+        self.car_throttle: float = 0
 
     def run_in_series(self, **kwargs):
         try:
@@ -59,6 +60,9 @@ class VehicleStateStreamer(UDPStreamer):
 
             self.hall_effect_sensor_velocity = d[15]
             self.recv_time = d[16]
+            self.car_throttle = d[17]
+            if (self.car_throttle > 1501) :
+                print(self.car_throttle)
         except Exception as e:
             self.logger.error(e)
 
